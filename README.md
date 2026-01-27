@@ -1,6 +1,6 @@
 # Galactic Dynamics Bovy
 
-[![Docs](https://img.shields.io/badge/docs-GitHub%20Pages-blue)](https://yourusername.github.io/galactic-dynamics-bovy/)
+[![Docs](https://img.shields.io/badge/docs-GitHub%20Pages-blue)](https://caverac.github.io/galactic-dynamics-bovy/)
 
 Solutions to problems from **Dynamics and Astrophysics of Galaxies** by Jo Bovy (Princeton University Press, Princeton Series in Astrophysics).
 
@@ -18,7 +18,7 @@ This project uses [uv](https://docs.astral.sh/uv/) for dependency management.
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/galactic-dynamics-bovy.git
+git clone https://github.com/caverac/galactic-dynamics-bovy.git
 cd galactic-dynamics-bovy
 
 # Install dependencies

@@ -39,3 +39,10 @@ repos:
         types: [python]
         pass_filenames: false
         args: ["galactic_dynamics_bovy"]
+
+      - id: affected-tests
+        name: affected tests
+        entry: uv run python scripts/run_affected_tests.py
+        language: system
+        types: [python]
+        pass_filenames: true
