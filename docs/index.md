@@ -15,39 +15,39 @@ This repository contains Python implementations and solutions to problems from t
 
 ## Chapters
 
-Solutions are organized by chapter. Legend: :white_check_mark: Complete | :construction: In Progress | :hourglass: Not Started
+Solutions are organized by chapter. Legend: :white_check_mark: Complete | 🚧  In Progress | ⏳ Not Started | ✅ Completed
 
 ### Part I: Basics of Galactic Dynamics
 
-- :hourglass: Chapter 1: Introduction
-- :construction: Chapter 2: Gravitation
-- :hourglass: Chapter 3: Elements of Classical Mechanics
-- :hourglass: Chapter 4: Orbits in Spherical Mass Distributions
-- :hourglass: Chapter 5: Equilibria of Collisionless Stellar Systems
-- :hourglass: Chapter 6: Masses of Spherical Stellar Systems
+- ✅ Chapter 1: Introduction
+- 🚧  Chapter 2: Gravitation
+- ⏳ Chapter 3: Elements of Classical Mechanics
+- ⏳ Chapter 4: Orbits in Spherical Mass Distributions
+- ⏳ Chapter 5: Equilibria of Collisionless Stellar Systems
+- ⏳ Chapter 6: Masses of Spherical Stellar Systems
 
 ### Part II: Disk Galaxies
 
-- :hourglass: Chapter 7: Gravitation in Galactic Disks
-- :hourglass: Chapter 8: The Kinematics and Dynamics of Galactic Rotation
-- :hourglass: Chapter 9: Orbits in Disks
-- :hourglass: Chapter 10: Equilibria of Galactic Disks
-- :hourglass: Chapter 11: Chemical Evolution in Galaxies
+- ⏳ Chapter 7: Gravitation in Galactic Disks
+- ⏳ Chapter 8: The Kinematics and Dynamics of Galactic Rotation
+- ⏳ Chapter 9: Orbits in Disks
+- ⏳ Chapter 10: Equilibria of Galactic Disks
+- ⏳ Chapter 11: Chemical Evolution in Galaxies
 
 ### Part III: Elliptical Galaxies
 
-- :hourglass: Chapter 12: Gravitation in Elliptical Galaxies and Dark Matter Halos
-- :hourglass: Chapter 13: Orbits in Triaxial Mass Distributions and Surfaces of Section
-- :hourglass: Chapter 14: Equilibria of Elliptical Galaxies and Dark Matter Halos
-- :hourglass: Chapter 15: Gravitational Lensing
-- :hourglass: Chapter 16: Mass Modeling in Elliptical Galaxies
+- ⏳ Chapter 12: Gravitation in Elliptical Galaxies and Dark Matter Halos
+- ⏳ Chapter 13: Orbits in Triaxial Mass Distributions and Surfaces of Section
+- ⏳ Chapter 14: Equilibria of Elliptical Galaxies and Dark Matter Halos
+- ⏳ Chapter 15: Gravitational Lensing
+- ⏳ Chapter 16: Mass Modeling in Elliptical Galaxies
 
 ### Part IV: Galaxy Formation and Evolution
 
-- :hourglass: Chapter 17: Formation of Dark Matter Halos
-- :hourglass: Chapter 18: Extragalactic Astronomy
-- :hourglass: Chapter 19: Hierarchical Galaxy Formation
-- :hourglass: Chapter 20: Internal Evolution in Galaxies
+- ⏳ Chapter 17: Formation of Dark Matter Halos
+- ⏳ Chapter 18: Extragalactic Astronomy
+- ⏳ Chapter 19: Hierarchical Galaxy Formation
+- ⏳ Chapter 20: Internal Evolution in Galaxies
 
 ## Getting Started
 
