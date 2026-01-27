@@ -4,7 +4,6 @@ from pathlib import Path
 from unittest.mock import MagicMock, patch
 
 import numpy as np
-import pytest
 
 from galactic_dynamics_bovy.chapter02.ic_2574 import (
     fit_linear_rotation,
@@ -32,7 +31,7 @@ class TestLoadIc2574Data:
 
     def test_data_has_expected_size(self) -> None:
         """Verify data has expected number of points."""
-        radius, velocity, error = load_ic2574_data()
+        radius, _, _ = load_ic2574_data()
 
         assert len(radius) == 34
 

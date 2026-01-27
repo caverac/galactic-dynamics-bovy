@@ -1,5 +1,7 @@
 # Galactic Dynamics Bovy
 
+[![Docs](https://img.shields.io/badge/docs-GitHub%20Pages-blue)](https://yourusername.github.io/galactic-dynamics-bovy/)
+
 Solutions to problems from **Dynamics and Astrophysics of Galaxies** by Jo Bovy (Princeton University Press, Princeton Series in Astrophysics).
 
 ## Book Reference
