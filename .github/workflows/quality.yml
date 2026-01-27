@@ -1,0 +1,64 @@
+name: Quality
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quality:
+    name: Lint, Test, Build Docs
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+
+      - name: Sync dependencies
+        run: uv sync
+
+      - name: Black (check)
+        run: uv run black --check galactic_dynamics_bovy tests
+
+      - name: Flake8
+        run: uv run flake8 galactic_dynamics_bovy tests
+
+      - name: Pylint
+        run: uv run pylint galactic_dynamics_bovy tests
+
+      - name: Pydocstyle
+        run: uv run pydocstyle galactic_dynamics_bovy
+
+      - name: Mypy
+        run: uv run mypy galactic_dynamics_bovy
+
+      - name: Pytest
+        run: uv run pytest
+
+      - name: Install Pandoc
+        run: sudo apt-get update && sudo apt-get install -y pandoc
+
+      - name: Generate assets
+        run: |
+          mkdir -p docs/assets/generated
+          uv run python scripts/generate_assets.py
+
+      - name: Build docs
+        run: uv run mkdocs build --strict
