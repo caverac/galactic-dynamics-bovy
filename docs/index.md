@@ -51,4 +51,4 @@ Solutions are organized by chapter. Legend: ✅ Complete | 🚧  In Progress | �
 
 ## Getting Started
 
-See the [GitHub repository](https://github.com/yourusername/galactic-dynamics-bovy) for installation and usage instructions.
+See the [GitHub repository](https://github.com/caverac/galactic-dynamics-bovy) for installation and usage instructions.

@@ -10,8 +10,9 @@ in two unit systems commonly used in galactic dynamics:
 - StellarUnits: (pc, Msun, Myr, km/s)
 - GalacticUnits: (kpc, 10^10 Msun, Gyr, km/s)
 
-Notes:
-- Astropy's type stubs are incomplete, so we ignore type errors here
+Notes
+-----
+Astropy's type stubs are incomplete, so we ignore type errors here.
 """
 
 from typing import ClassVar

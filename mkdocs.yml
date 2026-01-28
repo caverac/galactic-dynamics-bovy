@@ -2,7 +2,7 @@ site_name: Galactic Dynamics Bovy - Solutions
 site_description: Solutions to Dynamics and Astrophysics of Galaxies by Jo Bovy
 site_author: Your Name
 
-repo_url: https://github.com/yourusername/galactic-dynamics-bovy
+repo_url: https://github.com/caverac/galactic-dynamics-bovy
 repo_name: galactic-dynamics-bovy
 
 theme:

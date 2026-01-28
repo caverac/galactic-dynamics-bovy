@@ -7,7 +7,6 @@ import pytest
 
 from galactic_dynamics_bovy.utils.units import GalacticUnits, StellarUnits
 
-
 # ── Reference values from astropy (used for cross-checks) ────────────────────
 
 _G = constants.G
