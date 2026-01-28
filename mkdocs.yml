@@ -41,6 +41,7 @@ plugins:
             show_source: true
   - bibtex:
       bib_file: docs/refs.bib
+      csl_file: docs/apa.csl
 
 markdown_extensions:
   - admonition

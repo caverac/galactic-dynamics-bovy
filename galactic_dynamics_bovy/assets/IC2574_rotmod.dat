@@ -1,5 +1,5 @@
 # Distance = 3.91 Mpc
-# Rad	Vobs	errV	Vgas	Vdisk	Vbul	SBdisk	SBbul		
+# Rad	Vobs	errV	Vgas	Vdisk	Vbul	SBdisk	SBbul
 # kpc	km/s	km/s	km/s	km/s	km/s	L/pc^2	L/pc^2
 0.85	10.30	0.20	0.00	9.59	0.00	16.75	0.00
 1.14	12.90	2.70	0.00	11.99	0.00	14.92	0.00

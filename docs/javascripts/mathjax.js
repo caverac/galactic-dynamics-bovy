@@ -10,3 +10,8 @@ window.MathJax = {
     processHtmlClass: "arithmatex"
   }
 };
+
+// Re-render MathJax after instant navigation
+document$.subscribe(() => {
+  MathJax.typesetPromise();
+});

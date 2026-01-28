@@ -78,7 +78,7 @@ ignore_missing_imports = true
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-addopts = "--cov=galactic_dynamics_bovy --cov-report=term-missing --cov-fail-under=100"
+addopts = "--doctest-modules --cov=galactic_dynamics_bovy --cov-report=term-missing --cov-fail-under=100"
 
 [tool.pylint.format]
 max-line-length = 120
@@ -90,6 +90,7 @@ disable = [
     "too-many-locals",
     "too-many-statements",
     "too-few-public-methods",
+    "duplicate-code",
 ]
 
 [tool.pyright]

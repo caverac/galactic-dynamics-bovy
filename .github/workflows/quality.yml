@@ -13,52 +13,107 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  quality:
-    name: Lint, Test, Build Docs
+  black:
+    name: Black
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-
-      - name: Install uv
-        uses: astral-sh/setup-uv@v6
+      - uses: astral-sh/setup-uv@v6
         with:
           enable-cache: true
+      - run: uv sync
+      - run: uv run black --check galactic_dynamics_bovy tests
 
-      - name: Sync dependencies
-        run: uv sync
+  flake8:
+    name: Flake8
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+      - run: uv sync
+      - run: uv run flake8 galactic_dynamics_bovy tests
 
-      - name: Black (check)
-        run: uv run black --check galactic_dynamics_bovy tests
+  pylint:
+    name: Pylint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+      - run: uv sync
+      - run: uv run pylint galactic_dynamics_bovy tests
 
-      - name: Flake8
-        run: uv run flake8 galactic_dynamics_bovy tests
+  pydocstyle:
+    name: Pydocstyle
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+      - run: uv sync
+      - run: uv run pydocstyle galactic_dynamics_bovy
 
-      - name: Pylint
-        run: uv run pylint galactic_dynamics_bovy tests
+  mypy:
+    name: Mypy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+      - run: uv sync
+      - run: uv run mypy galactic_dynamics_bovy
 
-      - name: Pydocstyle
-        run: uv run pydocstyle galactic_dynamics_bovy
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+      - run: uv sync
+      - run: uv run pytest
 
-      - name: Mypy
-        run: uv run mypy galactic_dynamics_bovy
-
-      - name: Pytest
-        run: uv run pytest
-
+  docs:
+    name: Build Docs
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+      - run: uv sync
       - name: Install Pandoc
         run: sudo apt-get update && sudo apt-get install -y pandoc
-
       - name: Generate assets
         run: |
           mkdir -p docs/assets/generated
           uv run python scripts/generate_assets.py
-
       - name: Build docs
         run: uv run mkdocs build --strict

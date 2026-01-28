@@ -15,7 +15,7 @@ This repository contains Python implementations and solutions to problems from t
 
 ## Chapters
 
-Solutions are organized by chapter. Legend: :white_check_mark: Complete | 🚧  In Progress | ⏳ Not Started | ✅ Completed
+Solutions are organized by chapter. Legend: ✅ Complete | 🚧  In Progress | ⏳ Not Started |
 
 ### Part I: Basics of Galactic Dynamics
 
