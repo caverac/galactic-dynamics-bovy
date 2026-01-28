@@ -1,3 +1,9 @@
+## v0.2.0 (2026-01-28)
+
+### Feat
+
+- **chapter02**: completed problem 2.2
+
 ## v0.1.2 (2026-01-27)
 
 ### Fix
