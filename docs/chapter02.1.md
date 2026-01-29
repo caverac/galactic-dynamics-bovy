@@ -489,6 +489,131 @@ flowchart TD
 <!-- ======================= -->
 ## Problem 2.9
 
+
+### Mass, potential, and circular velocity
+Call the mass-to-light ratio $\Upsilon = M/L$, the density is
+
+$$
+\rho(x) = \frac{\Upsilon I_0}{2a} \frac{1}{(1 + r^2 / a^2)^{3/2}}.
+$$
+
+The mass profile is
+
+$$
+\begin{align}
+M(<r) &= 4\pi \int_0^r dr' \,r'^2 \rho(r') \\
+&= 2\pi \Upsilon I_0 a^2 \int_0^{r/a} dx \, \frac{x^2}{(1 + x^2)^{3/2}} \\
+&= 2\pi \Upsilon I_0 a^2 \left[\mathrm{arcsinh}(r/a) - \frac{r/a}{(1 + r^2/a^2)^{1/2}}\right] \tag{2.9.1}
+\end{align}
+$$
+
+The gravitational potential is
+
+$$
+\begin{align}
+\Phi(r) &= -\frac{GM(<r)}{r} - 4\pi G \int_r^\infty dr' \, r' \rho(r') \\
+&= -\frac{2\pi G \Upsilon I_0 a^2}{r} \left[\mathrm{arcsinh}(r/a) - \frac{r/a}{(1 + r^2/a^2)^{1/2}}\right] -2\pi G \Upsilon I_0 a^2 \left[\frac{1}{(1 + r^2/a^2)^{1/2}}\right] \\
+&= - \frac{2\pi G \Upsilon I_0 a^2}{r} \mathrm{arcsinh}(r/a) \tag{2.9.2}
+\end{align}
+$$
+
+and the circular velocity is
+
+$$
+v_c^2(r) = r \frac{d\Phi}{dr} = \frac{2\pi G \Upsilon I_0 a^2}{r} \left[\mathrm{arcsinh}(r/a) - \frac{r/a}{(1 + r^2/a^2)^{1/2}}\right]. \tag{2.9.3}
+$$
+
+### Limiting behaviors
+
+For $x \gg 1$ we have
+
+$$
+\begin{align}
+\mathrm{arcsinh}(x) = \ln (2x) + \frac{1}{4x^2} + \mathcal{O}(x^{-4}) \\
+\frac{x}{(1 + x^2)^{1/2}} = 1 - \frac{x^2}{2} + \mathcal{O}(x^{-4})
+\end{align}
+$$
+
+so that
+
+$$
+\begin{align}
+M(<r) &= 2\pi \Upsilon I_0 a^2 \left[\ln\frac{2r}{a} - 1 + \frac{3a}{4r^2} + \mathcal{O}\left(\frac{a^4}{r^4}\right)\right] \\
+\Phi(r) &= -\frac{2\pi G \Upsilon I_0 a^2}{r} \left[\ln\frac{2r}{a} + \frac{a^2}{4r^2} + \mathcal{O}\left(\frac{a^4}{r^4}\right)\right] \\
+v_c^2(r) &= \frac{2\pi G \Upsilon I_0 a^2}{r}\left[\ln\frac{2r}{a} - 1 + \frac{3a^2}{4r^2} + \mathcal{O}\left(\frac{a^4}{r^4}\right)\right]
+\end{align}
+$$
+
+Mass logarithmically diverges, potential falls off as $1/r$ with a logarithmic correction, and circular velocity falls off as $\sqrt{\ln r/r}$.
+
+<!-- ======================= -->
+<!-- PROBLEM 2.10             -->
+<!-- ======================= -->
+## Problem 2.10
+
+For the profile
+
+$$
+\rho(r) = \frac{\rho_0}{(r/a)^\gamma (1 + r/a)^{4 - \gamma}},
+$$
+
+we have
+
+### Mass
+
+$$
+\begin{align}
+M(<r) &= 4\pi \int_0^r dr' \,r'^2 \rho(r') \\
+&= 4\pi \rho_0 a^3 \int_0^{r/a} dx \, \frac{x^{2 - \gamma}}{(1 + x)^{4 - \gamma}} \\
+&= \frac{4\pi \rho_0 a^3}{3 - \gamma}\left(\frac{r}{r + a}\right)^{3 - \gamma} \\
+&= M_\gamma\left(\frac{r}{r + a}\right)^{3 - \gamma} \quad 0\leq \gamma < 3\tag{2.10.1}
+\end{align}
+$$
+
+Total mass is
+
+$$
+M_\gamma = \lim_{r \to \infty} M(<r) = \frac{4\pi \rho_0 a^3}{3 - \gamma}.
+$$
+
+### Potential
+
+For $\gamma \neq 2$, the contribution to the potential from the outer-shell integral is ($x = r/a$)
+
+$$
+\begin{align}
+I_{\mathrm{out}}(r) &= \int_x^\infty dx' \, \frac{1}{x'^{\gamma - 1} (1 + x')^{4 - \gamma}} \\
+&= \int_u^1 du'\, (u'^{1-\gamma} -u'^{2-\gamma}) \quad u = \frac{x}{1 + x} \\
+&= \left[\frac{u'^{2 - \gamma}}{2 - \gamma} - \frac{u'^{3 - \gamma}}{3 - \gamma} \right]_u^1 \\
+&= \frac{1}{(2 - \gamma)(3 - \gamma)} - \left[\frac{u^{2 - \gamma}}{2 - \gamma} - \frac{u^{3 - \gamma}}{3 - \gamma}\right]
+\end{align}
+$$
+
+The potential is then
+
+$$
+\begin{align}
+\Phi(r) &= -\frac{GM(<r)}{r} - 4\pi G \rho_0 a^2 I_{\mathrm{out}}(r) \\
+&= -\frac{4\pi G \rho_0 a^2}{(2 - \gamma)(3 - \gamma)} \left[1 - \left(\frac{r}{r + a} \right)^{2 - \gamma}\right] \\
+&= -\frac{G M_\gamma}{(2 - \gamma) a} \left[1 - \left(\frac{r}{r + a} \right)^{2 - \gamma}\right] \quad \gamma \neq 2 \tag{2.10.2}
+\end{align}
+$$
+
+For $\gamma = 2$, the outer-shell integral is
+
+$$
+\begin{align}
+I_{\mathrm{out}}(r) &= \int_x^\infty dx' \, \frac{1}{x'^{0} (1 + x')^{2}} \\
+&= -\ln u - (1 - u)
+\end{align}
+$$
+
+And the potential becomes
+
+$$
+\Phi(r) = -\frac{G M_2}{a} \ln\left(\frac{r + a}{r}\right) \quad \gamma = 2. \tag{2.10.3}
+$$
+
 <!-- ======================= -->
 <!-- REFERENCES              -->
 <!-- ======================= -->
