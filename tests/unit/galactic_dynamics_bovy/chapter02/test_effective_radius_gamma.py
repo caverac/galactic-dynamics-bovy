@@ -138,6 +138,12 @@ class TestComputeEffectiveRadius:
         xe2 = compute_effective_radius(gamma=1.5)
         assert xe1 != xe2
 
+    def test_unnormalized_returns_positive(self) -> None:
+        """Unnormalized effective radius should be positive."""
+        xe = compute_effective_radius(gamma=1.0, normalize=False)
+        assert xe > 0
+        assert np.isfinite(xe)
+
 
 class TestPlotEffectiveRadiusGamma:
     """Tests for plot_effective_radius_gamma function."""
