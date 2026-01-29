@@ -10,6 +10,7 @@ where k = π/R and R is the boundary radius where ρ(R) = 0.
 
 The circular velocity is:
     v_c² = (4πGρ_c/k²) * (sinc(kr) - cos(kr))  for r ≤ R
+    v_c² = GM/r                                 for r > R  (Keplerian)
 
 The total mass is:
     M = 4ρ_c R³/π
@@ -81,16 +82,27 @@ def vcirc_fermi_gas(
     ndarray
         Circular velocity in km/s.
     """
-    kr = k * r
-    # Handle r=0 case: sinc(0) - cos(0) = 1 - 1 = 0, so v_c(0) = 0
-    with np.errstate(divide="ignore", invalid="ignore"):
-        sinc_kr = np.sinc(kr / np.pi)  # np.sinc(x) = sin(πx)/(πx)
-        term = sinc_kr - np.cos(kr)
+    r = np.atleast_1d(np.asarray(r, dtype=np.float64))
+    boundary_radius = np.pi / k
+    inside = r <= boundary_radius
 
-    # v_c² = (4πGρ_c/k²) * (sinc(kr) - cos(kr))
-    vc_squared = 4 * np.pi * G * rho_c / k**2 * term
+    vc_squared = np.zeros_like(r)
+
+    # Inside boundary: v_c² = (4πGρ_c/k²) * (sinc(kr) - cos(kr))
+    if np.any(inside):
+        kr = k * r[inside]
+        with np.errstate(divide="ignore", invalid="ignore"):
+            sinc_kr = np.sinc(kr / np.pi)  # np.sinc(x) = sin(πx)/(πx)
+            term = sinc_kr - np.cos(kr)
+        vc_squared[inside] = 4 * np.pi * G * rho_c / k**2 * term
+
+    # Outside boundary: v_c² = GM/r (Keplerian)
+    # Total mass M = 4π²ρ_c/k³
+    if np.any(~inside):
+        total_mass = 4 * np.pi**2 * rho_c / k**3
+        vc_squared[~inside] = G * total_mass / r[~inside]
+
     vc_squared = np.maximum(vc_squared, 0)  # Ensure non-negative
-
     return np.sqrt(vc_squared)
 
 
@@ -111,8 +123,9 @@ def plot_fermi_gas_vcirc(*, path: Path | None = None) -> None:
 
     rho_c, k = get_fermi_gas_params(total_mass, boundary_radius)
 
-    # Radius grid from 0 to R
-    r = np.linspace(0, boundary_radius, 500)
+    # Radius grid extending beyond R to show Keplerian falloff
+    r_max = 2.0 * boundary_radius
+    r = np.linspace(0, r_max, 500)
     vc = vcirc_fermi_gas(r, rho_c, k, units.G_kms)
 
     fig: Figure
@@ -121,10 +134,23 @@ def plot_fermi_gas_vcirc(*, path: Path | None = None) -> None:
 
     ax.plot(r, vc, "-", color="#000000", linewidth=2)
 
+    # Vertical marker at r=R
+    ax.axvline(x=boundary_radius, color="#888888", linestyle="--", linewidth=1.5)
+
     ax.set_xlabel(r"$r$ (kpc)")
     ax.set_ylabel(r"$v_c$ (km/s)")
-    ax.set_xlim(0, boundary_radius)
+    ax.set_xlim(0, r_max)
     ax.set_ylim(0, None)
+
+    # Add label for R (after ylim is auto-set)
+    ylim = ax.get_ylim()
+    ax.text(
+        boundary_radius + 0.3,
+        ylim[1] * 0.92,
+        r"$R$",
+        fontsize=12,
+        color="#888888",
+    )
 
     ax.xaxis.set_minor_locator(AutoMinorLocator())
     ax.yaxis.set_minor_locator(AutoMinorLocator())

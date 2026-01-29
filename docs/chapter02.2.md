@@ -162,7 +162,7 @@ $$
 
 ![Fermi gas circular velocity](assets/generated/fermi_gas_vcirc.png)
 
-*Figure 2.13: Circular velocity profile of the Fermi gas model with $R=15kp$ and $M=10^{11}M_\odot$.*
+*Figure 2.13: Circular velocity profile of the Fermi gas model with $R=15\, \mathrm{kpc}$ and $M=10^{11}\, \mathrm{M}_\odot$.*
 
 
 Script to generate figure:
@@ -171,3 +171,5 @@ Script to generate figure:
 from galactic_dynamics_bovy.chapter02.fermi_gas_vcirc import plot_fermi_gas_vcirc
 plot_fermi_gas_vcirc()
 ```
+
+Note that for $r > R$ the circular velocity is simply $v_c^2 = GM/r$.

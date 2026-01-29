@@ -92,6 +92,50 @@ class TestVcircFermiGas:
         assert len(vc) == 100
         assert all(np.isfinite(vc))
 
+    def test_keplerian_outside_boundary(self) -> None:
+        """Velocity should follow Keplerian falloff outside boundary."""
+        units = GalacticUnits()
+        boundary_radius = 15.0
+        total_mass = 10.0
+        rho_c, k = get_fermi_gas_params(total_mass, boundary_radius)
+
+        # Test at r > R
+        r = np.array([20.0, 30.0])
+        vc = vcirc_fermi_gas(r, rho_c, k, units.G_kms)
+
+        # v_c² = GM/r, so v_c(r1)/v_c(r2) = sqrt(r2/r1)
+        expected_ratio = np.sqrt(r[1] / r[0])
+        assert np.isclose(vc[0] / vc[1], expected_ratio)
+
+    def test_continuous_at_boundary(self) -> None:
+        """Velocity should be continuous at r=R."""
+        units = GalacticUnits()
+        boundary_radius = 15.0
+        rho_c, k = get_fermi_gas_params(10.0, boundary_radius)
+
+        # Just inside and just outside the boundary
+        eps = 1e-6
+        r_inside = np.array([boundary_radius - eps])
+        r_outside = np.array([boundary_radius + eps])
+
+        vc_inside = vcirc_fermi_gas(r_inside, rho_c, k, units.G_kms)
+        vc_outside = vcirc_fermi_gas(r_outside, rho_c, k, units.G_kms)
+
+        assert np.isclose(vc_inside[0], vc_outside[0], rtol=1e-4)
+
+    def test_mixed_inside_outside(self) -> None:
+        """Should handle array with both inside and outside points."""
+        units = GalacticUnits()
+        boundary_radius = 15.0
+        rho_c, k = get_fermi_gas_params(10.0, boundary_radius)
+
+        r = np.array([5.0, 10.0, 20.0, 30.0])  # 2 inside, 2 outside
+        vc = vcirc_fermi_gas(r, rho_c, k, units.G_kms)
+
+        assert len(vc) == 4
+        assert all(vc > 0)
+        assert all(np.isfinite(vc))
+
 
 class TestPlotFermiGasVcirc:
     """Tests for plot_fermi_gas_vcirc function."""
