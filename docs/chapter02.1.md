@@ -353,6 +353,143 @@ plot_exponential_vcirc()
 ```
 
 <!-- ======================= -->
+<!-- PROBLEM 2.8             -->
+<!-- ======================= -->
+## Problem 2.8
+
+### Potential
+
+Consider a 1D mass distribution $\rho(x) = A\delta(x)$,
+
+$$
+m = \int_{-\infty}^\infty dx \, \rho(x) = A.
+$$
+
+Constant $A$ is therefore the total mass of the distribution. The 1D Poisson equation is
+
+$$
+\frac{d^2 \Phi}{dx^2} = 4\pi G m \delta(x).
+$$
+
+Away from $x=0$ the this equation is homogenous, so the potential is linear in $x$.
+
+$$
+\Phi(x) = \begin{cases}a x + b, & x < 0 \\ -ax + b, & x > 0\end{cases} \tag{2.8.1}
+$$
+
+where symmetry and continuity are used to set the coefficients. Now, let's integrate the Poisson equation across $x=0$:
+
+$$
+\begin{align}
+\int_{-\epsilon}^{\epsilon} dx \, \frac{d^2 \Phi}{dx^2} &= 4\pi G m \int_{-\epsilon}^{\epsilon} dx \, \delta(x) \\
+&= 2a = 4\pi G m
+\end{align}
+$$
+
+The potential is therefore
+
+$$
+\Phi(x) = 2\pi G m |x|.
+$$
+
+Where I dropped the constant $b$ since it is physically irrelevant. The force is then
+
+$$
+F(x) = -\frac{d\Phi}{dx} = -2\pi G m \, \mathrm{sgn}(x).
+$$
+
+### N-body simulation
+
+
+For an $N$-body simulation with $N$ particles of equal mass $m$, the force on particle $i$ is
+
+$$
+F_i = 2\pi G m (N_i^+ - N_i^-),
+$$
+
+where $N_i^+$ and $N_i^-$ are the number of particles to the right and left of particle $i$. This can be computed in $\mathcal{O}(N \log N)$ time by sorting the particles.
+
+```mermaid
+flowchart TD
+    A["Input: positions x₁, x₂, ..., xₙ"] --> B["Sort positions — O(N log N)"]
+    B --> C["For particle at sorted position k:<br/>N_left = k, N_right = N − 1 − k"]
+    C --> D["Compute force:<br/>F_k = 2πGm(N_right − N_left)"]
+    D --> E["Map forces back to original order"]
+    E --> F["Output: forces F₁, F₂, ..., Fₙ"]
+```
+
+
+For a uniform distribution on $[-1/2, 1/2]$ with total mass $M$, the theoretical force is
+
+$$
+F(x) = -4\pi G M x.
+$$
+
+![1D N-body Force Comparison](assets/generated/nbody_1d_force.png)
+
+*Figure 2.8: Comparison of numerical vs theoretical gravitational force for $N = 10000$ particles uniformly distributed on $[-1/2, 1/2]$. The error $(F_{\mathrm{numerical}} - F_{\mathrm{theory}}) / (4 \pi G M)$ stays close to zero across the distribution.*
+
+Script to generate figure:
+
+```python
+from galactic_dynamics_bovy.chapter02.nbody_1d import plot_force_comparison
+plot_force_comparison()
+```
+
+### Energy
+
+To calculate the forces we already sorted the particles. The potential energy of particle $i$ is:
+
+$$
+\Phi_i = 2\pi G m \sum_{j \neq i} |x_i - x_j|
+$$
+
+For a particle at sorted position $k$, this splits into:
+
+$$
+\Phi_k = 2\pi G m \left[ \sum_{j<k} (x_k - x_j) + \sum_{j>k} (x_j - x_k) \right]
+$$
+
+This can be rewritten as:
+
+$$
+\Phi_k = 2\pi G m \left[ k \cdot x_k - S_{\text{left}}(k) + S_{\text{right}}(k) - (N-1-k) \cdot x_k \right]
+$$
+
+where:
+- $S_{\text{left}}(k) = \sum_{j<k} x_j$ (sum of positions to the left)
+- $S_{\text{right}}(k) = \sum_{j>k} x_j$ (sum of positions to the right)
+
+The trick: compute a prefix sum array once in $\mathcal{O}(N)$:
+
+```python
+prefix[k] = x[0] + x[1] + ... + x[k-1]
+```
+
+
+Then:
+
+- $S_{\text{left}}(k) = \texttt{prefix}[k]$
+- $S_{\text{right}}(k) = \texttt{totalsum} - \texttt{prefix}[k] - x_k$
+
+Each particle's potential energy is then computed in $\mathcal{O}(1)$, giving $\mathcal{O}(N)$ total.
+
+```mermaid
+flowchart TD
+    A["Input: sorted positions x₁ ≤ x₂ ≤ ... ≤ xₙ"] --> B["Compute prefix sum array — O(N)<br/>prefix[k] = x₀ + x₁ + ... + x_{k-1}"]
+    B --> C["Compute total sum<br/>S_total = x₀ + x₁ + ... + x_{N-1}"]
+    C --> D["For each particle k:"]
+    D --> E["S_left = prefix[k]<br/>S_right = S_total − prefix[k] − x_k"]
+    E --> F["Φ_k = 2πGm[k·x_k − S_left + S_right − (N−1−k)·x_k]"]
+    F --> G["Output: potential energies Φ₁, Φ₂, ..., Φₙ"]
+```
+
+<!-- ======================= -->
+<!-- PROBLEM 2.9             -->
+<!-- ======================= -->
+## Problem 2.9
+
+<!-- ======================= -->
 <!-- REFERENCES              -->
 <!-- ======================= -->
 ## References

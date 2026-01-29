@@ -11,6 +11,7 @@ Usage:
 from pathlib import Path
 
 from galactic_dynamics_bovy.chapter02.ic_2574 import plot_rotation_curve
+from galactic_dynamics_bovy.chapter02.nbody_1d import plot_force_comparison
 from galactic_dynamics_bovy.chapter02.rvir_mvir import plot_rvir_mvir_delta
 from galactic_dynamics_bovy.chapter02.spherical_exponential import plot_exponential_vcirc
 from galactic_dynamics_bovy.chapter02.vcirc_profiles import plot_vcirc_profiles
@@ -35,6 +36,9 @@ def main() -> None:
 
     print("Generating exponential disk velocity curves...")
     plot_exponential_vcirc(ASSETS_DIR / "exponential_vcirc.png")
+
+    print("Generating 1D N-body force comparison...")
+    plot_force_comparison(path=ASSETS_DIR / "nbody_1d_force.png")
 
     print("Done.")
 
