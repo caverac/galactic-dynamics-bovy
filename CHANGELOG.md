@@ -1,3 +1,12 @@
+## v0.3.0 (2026-01-29)
+
+### Feat
+
+- **chapter02**: completed problem 2.9-10
+- added decorator to register generated assets
+- **chapter02**: completed problem 2.8
+- **chapter02**: completed problems 2.3-2.7
+
 ## v0.2.1 (2026-01-28)
 
 ### Fix
