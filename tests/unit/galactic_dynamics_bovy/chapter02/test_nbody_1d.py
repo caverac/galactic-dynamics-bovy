@@ -122,7 +122,7 @@ class TestPlotForceComparison:
         mock_ax = MagicMock()
         mock_plt.subplots.return_value = (mock_fig, mock_ax)
 
-        plot_force_comparison(n_particles=100)
+        plot_force_comparison()
 
         mock_plt.subplots.assert_called_once()
 
@@ -133,7 +133,7 @@ class TestPlotForceComparison:
         mock_ax = MagicMock()
         mock_plt.subplots.return_value = (mock_fig, mock_ax)
 
-        plot_force_comparison(n_particles=100, path=None)
+        plot_force_comparison(path=None)
 
         mock_plt.show.assert_called_once()
 
@@ -145,7 +145,7 @@ class TestPlotForceComparison:
         mock_plt.subplots.return_value = (mock_fig, mock_ax)
         test_path = Path("/tmp/test_plot.png")
 
-        plot_force_comparison(n_particles=100, path=test_path)
+        plot_force_comparison(path=test_path)
 
         mock_fig.savefig.assert_called_once()
         mock_plt.close.assert_called_once_with(mock_fig)
@@ -157,7 +157,7 @@ class TestPlotForceComparison:
         mock_ax = MagicMock()
         mock_plt.subplots.return_value = (mock_fig, mock_ax)
 
-        plot_force_comparison(n_particles=100)
+        plot_force_comparison()
 
         mock_ax.set_xlabel.assert_called_once()
         mock_ax.set_ylabel.assert_called_once()

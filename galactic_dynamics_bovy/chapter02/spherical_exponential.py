@@ -26,6 +26,8 @@ import numpy as np
 import numpy.typing as npt
 from scipy.special import i0, i1, k0, k1  # pylint: disable=no-name-in-module
 
+from galactic_dynamics_bovy.utils.assets import register_asset, save_figure_if_changed
+
 
 def vcirc_spherical_exponential(x: npt.NDArray[np.float64]) -> npt.NDArray[np.float64]:
     """Compute normalized circular velocity for spherical exponential disk.
@@ -62,6 +64,7 @@ def vcirc_exponential_disk(x: npt.NDArray[np.float64]) -> npt.NDArray[np.float64
     return 2.0 * y**2 * (i0(y) * k0(y) - i1(y) * k1(y))
 
 
+@register_asset("exponential_vcirc.png")
 def plot_exponential_vcirc(path: Path | None = None) -> None:
     """Plot circular velocity for spherical and true exponential disks.
 
@@ -116,7 +119,7 @@ def plot_exponential_vcirc(path: Path | None = None) -> None:
     plt.tight_layout()
 
     if path:
-        fig.savefig(path, dpi=150, bbox_inches="tight")
+        save_figure_if_changed(fig, path, dpi=150, bbox_inches="tight")
         plt.close(fig)
     else:
         plt.show()

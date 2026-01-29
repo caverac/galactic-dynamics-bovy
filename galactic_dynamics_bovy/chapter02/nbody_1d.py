@@ -25,6 +25,8 @@ from matplotlib.ticker import AutoMinorLocator
 import numpy as np
 import numpy.typing as npt
 
+from galactic_dynamics_bovy.utils.assets import register_asset, save_figure_if_changed
+
 
 def compute_forces_1d(
     x: npt.NDArray[np.float64],
@@ -94,22 +96,20 @@ def force_theory_uniform(
     return -4 * np.pi * G * total_mass * x
 
 
-def plot_force_comparison(
-    n_particles: int = 10000,
-    path: Path | None = None,
-) -> None:
+@register_asset("nbody_1d_force.png")
+def plot_force_comparison(path: Path | None = None) -> None:
     """Plot comparison of numerical vs theoretical 1D gravitational force.
 
     Creates a plot showing ln(F_numerical / F_theory) vs position for
-    particles uniformly distributed on [-1/2, 1/2].
+    10000 particles uniformly distributed on [-1/2, 1/2].
 
     Parameters
     ----------
-    n_particles : int
-        Number of particles in the simulation.
     path : Path or None
         If provided, save the figure to this path. Otherwise display it.
     """
+    n_particles = 10000
+
     # Generate uniform distribution
     rng = np.random.default_rng(42)
     x = rng.uniform(-0.5, 0.5, n_particles)
@@ -150,7 +150,7 @@ def plot_force_comparison(
     plt.tight_layout()
 
     if path:
-        fig.savefig(path, dpi=150, bbox_inches="tight")
+        save_figure_if_changed(fig, path, dpi=150, bbox_inches="tight")
         plt.close(fig)
     else:
         plt.show()

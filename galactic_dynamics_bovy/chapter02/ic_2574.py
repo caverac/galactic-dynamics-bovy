@@ -19,6 +19,8 @@ import numpy as np
 import numpy.typing as npt
 from scipy import stats
 
+from galactic_dynamics_bovy.utils.assets import register_asset, save_figure_if_changed
+
 
 def load_ic2574_data() -> tuple[npt.NDArray[np.float64], npt.NDArray[np.float64], npt.NDArray[np.float64]]:
     """Load IC 2574 rotation curve data from SPARC.
@@ -68,6 +70,7 @@ def fit_linear_rotation(
     return result.slope, result.intercept
 
 
+@register_asset("ic2574_rotation_curve.png")
 def plot_rotation_curve(path: Path | None = None) -> None:
     """Plot IC 2574 rotation curve with linear fit for r < 6 kpc.
 
@@ -118,7 +121,7 @@ def plot_rotation_curve(path: Path | None = None) -> None:
     plt.tight_layout()
 
     if path:
-        fig.savefig(path, dpi=150, bbox_inches="tight")
+        save_figure_if_changed(fig, path, dpi=150, bbox_inches="tight")
         plt.close(fig)
     else:
         plt.show()

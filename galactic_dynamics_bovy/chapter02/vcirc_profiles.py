@@ -20,6 +20,8 @@ from matplotlib.ticker import AutoMinorLocator
 import numpy as np
 import numpy.typing as npt
 
+from galactic_dynamics_bovy.utils.assets import register_asset, save_figure_if_changed
+
 
 def vcirc_jaffe(x: npt.NDArray[np.float64]) -> npt.NDArray[np.float64]:
     """Compute normalized circular velocity for the Jaffe profile.
@@ -70,6 +72,7 @@ def vcirc_nfw(x: npt.NDArray[np.float64]) -> npt.NDArray[np.float64]:
     return np.sqrt(f_x / x)
 
 
+@register_asset("vcirc_profiles.png")
 def plot_vcirc_profiles(path: Path | None = None) -> None:
     """Plot circular velocity curves for Jaffe, Hernquist, and NFW profiles.
 
@@ -108,7 +111,7 @@ def plot_vcirc_profiles(path: Path | None = None) -> None:
     plt.tight_layout()
 
     if path:
-        fig.savefig(path, dpi=150, bbox_inches="tight")
+        save_figure_if_changed(fig, path, dpi=150, bbox_inches="tight")
         plt.close(fig)
     else:
         plt.show()

@@ -1,8 +1,10 @@
 #!/usr/bin/env python
+# pylint: disable=unused-import
+# flake8: noqa=F401
 """Generate documentation assets from solution plots.
 
-This script generates all figures for the documentation by calling
-plot functions from solution modules.
+This script discovers all registered plot functions and generates their
+corresponding figure assets for the documentation.
 
 Usage:
     uv run python scripts/generate_assets.py
@@ -10,11 +12,13 @@ Usage:
 
 from pathlib import Path
 
-from galactic_dynamics_bovy.chapter02.ic_2574 import plot_rotation_curve
-from galactic_dynamics_bovy.chapter02.nbody_1d import plot_force_comparison
-from galactic_dynamics_bovy.chapter02.rvir_mvir import plot_rvir_mvir_delta
-from galactic_dynamics_bovy.chapter02.spherical_exponential import plot_exponential_vcirc
-from galactic_dynamics_bovy.chapter02.vcirc_profiles import plot_vcirc_profiles
+# Import chapter modules to trigger decorator registration
+import galactic_dynamics_bovy.chapter02.ic_2574
+import galactic_dynamics_bovy.chapter02.nbody_1d
+import galactic_dynamics_bovy.chapter02.rvir_mvir
+import galactic_dynamics_bovy.chapter02.spherical_exponential
+import galactic_dynamics_bovy.chapter02.vcirc_profiles
+from galactic_dynamics_bovy.utils.assets import get_registered_assets
 
 ASSETS_DIR = Path(__file__).parent.parent / "docs" / "assets" / "generated"
 
@@ -24,23 +28,30 @@ def main() -> None:
     ASSETS_DIR.mkdir(parents=True, exist_ok=True)
     print(f"Assets directory: {ASSETS_DIR}")
 
-    # Chapter 2
-    print("Generating IC 2574 rotation curve...")
-    plot_rotation_curve(ASSETS_DIR / "ic2574_rotation_curve.png")
+    assets = get_registered_assets()
+    print(f"Found {len(assets)} registered assets\n")
 
-    print("Generating NFW virial mass/radius plot...")
-    plot_rvir_mvir_delta(ASSETS_DIR / "nfw_rvir_mvir_delta.png")
+    written = 0
+    skipped = 0
 
-    print("Generating circular velocity profiles...")
-    plot_vcirc_profiles(ASSETS_DIR / "vcirc_profiles.png")
+    for output_name, (plot_func, _) in sorted(assets.items()):
+        output_path = ASSETS_DIR / output_name
 
-    print("Generating exponential disk velocity curves...")
-    plot_exponential_vcirc(ASSETS_DIR / "exponential_vcirc.png")
+        # Check if file exists and get mtime before generation
+        existed = output_path.exists()
+        mtime_before = output_path.stat().st_mtime if existed else None
 
-    print("Generating 1D N-body force comparison...")
-    plot_force_comparison(path=ASSETS_DIR / "nbody_1d_force.png")
+        plot_func(path=output_path)
 
-    print("Done.")
+        # Check if file was actually written
+        if not existed or output_path.stat().st_mtime != mtime_before:
+            print(f"  [WRITE] {output_name}")
+            written += 1
+        else:
+            print(f"  [SKIP]  {output_name} (unchanged)")
+            skipped += 1
+
+    print(f"\nDone: {written} written, {skipped} unchanged")
 
 
 if __name__ == "__main__":

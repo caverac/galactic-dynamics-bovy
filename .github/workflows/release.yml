@@ -100,11 +100,6 @@ jobs:
       - name: Sync docs deps
         run: uv sync --group docs
 
-      - name: Generate assets
-        run: |
-          mkdir -p docs/assets/generated
-          uv run python scripts/generate_assets.py
-
       - name: Build docs
         run: uv run mkdocs build --strict
 

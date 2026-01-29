@@ -22,6 +22,7 @@ from matplotlib.ticker import AutoMinorLocator
 import numpy as np
 import numpy.typing as npt
 
+from galactic_dynamics_bovy.utils.assets import register_asset, save_figure_if_changed
 from galactic_dynamics_bovy.utils.units import GalacticUnits
 
 
@@ -93,6 +94,7 @@ def get_rvir_mvir_delta(
     return rvir, mvir, delta
 
 
+@register_asset("nfw_rvir_mvir_delta.png")
 def plot_rvir_mvir_delta(path: Path | None = None) -> None:
     """Plot virial mass and radius vs overdensity for an NFW halo.
 
@@ -150,7 +152,7 @@ def plot_rvir_mvir_delta(path: Path | None = None) -> None:
     plt.tight_layout()
 
     if path:
-        fig.savefig(path, dpi=150, bbox_inches="tight")
+        save_figure_if_changed(fig, path, dpi=150, bbox_inches="tight")
         plt.close(fig)
     else:
         plt.show()

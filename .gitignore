@@ -89,6 +89,3 @@ Thumbs.db
 
 # UV
 .uv/
-
-# Ignore generated assets
-docs/assets/generated/
