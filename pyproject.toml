@@ -87,6 +87,7 @@ max-line-length = 120
 disable = [
     "invalid-name",
     "too-many-arguments",
+    "too-many-instance-attributes",
     "too-many-locals",
     "too-many-statements",
     "too-few-public-methods",
