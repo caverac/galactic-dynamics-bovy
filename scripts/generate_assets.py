@@ -12,6 +12,8 @@ from pathlib import Path
 
 from galactic_dynamics_bovy.chapter02.ic_2574 import plot_rotation_curve
 from galactic_dynamics_bovy.chapter02.rvir_mvir import plot_rvir_mvir_delta
+from galactic_dynamics_bovy.chapter02.spherical_exponential import plot_exponential_vcirc
+from galactic_dynamics_bovy.chapter02.vcirc_profiles import plot_vcirc_profiles
 
 ASSETS_DIR = Path(__file__).parent.parent / "docs" / "assets" / "generated"
 
@@ -27,6 +29,12 @@ def main() -> None:
 
     print("Generating NFW virial mass/radius plot...")
     plot_rvir_mvir_delta(ASSETS_DIR / "nfw_rvir_mvir_delta.png")
+
+    print("Generating circular velocity profiles...")
+    plot_vcirc_profiles(ASSETS_DIR / "vcirc_profiles.png")
+
+    print("Generating exponential disk velocity curves...")
+    plot_exponential_vcirc(ASSETS_DIR / "exponential_vcirc.png")
 
     print("Done.")
 
