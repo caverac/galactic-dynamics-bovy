@@ -100,3 +100,74 @@ Now, the numerical considerations
 2. The values are interpolated using `scipy.interpolate.interp1d`. If a value outside the grid is requested, I directly use equations (2.12.1) and (2.12.2) to compute the values.
 3. Instead of optimizing for $x_e$ such that $m_p(x_e) = 1/2$, I just evalute the interpolation $x = x(m_p)$
 4. All these interpolations and numerical integrations deal with numerical divergences at small $x$, unfortunately large values of $\gamma$ make this more challenging, as the density becomes more centrally concentrated. I use logarithmic grids and careful handling of small values to mitigate this, however numerical noise remains for large $\gamma$.
+
+<!-- ======================= -->
+<!-- PROBLEM 2.13             -->
+<!-- ======================= -->
+## Problem 2.13
+
+
+### Density profile
+Define
+
+$$
+p = K\rho^2 \quad K = \frac{2\pi \hbar^2a}{m^3}.
+$$
+
+In hydrostatic equilibrium
+
+$$
+\frac{dp}{dr} = 2K\rho\frac{d\rho}{dr} = -\frac{GM(r)\rho(r)}{r^2} = -\rho \frac{d\Phi}{dr}.
+$$
+
+From here
+
+$$
+\Phi(r) = -2K\rho(r) + \text{constant}.
+$$
+
+Now, applying Poisson's equation
+
+$$
+\nabla^2\Phi = -2K\nabla^2\rho = 4\pi G \rho, \quad \nabla^2\rho +k^2 \rho = 0, \quad k^2 = \frac{2\pi G}{K}.
+$$
+
+(Density profile is a solution to the Helmholtz equation!)
+The general solution is
+
+$$
+\rho(r) = \frac{A\sin(kr)}{r} + \frac{B\cos(kr)}{r}.
+$$
+
+To ensure regular solutions at $r=0$, we set $B=0$. Setting $\rho_0 = \lim_{r\to 0}\rho(r) = Ak$, we have
+
+$$
+\rho(r) = \rho_0 \mathrm{sinc}(kr), \quad k = \sqrt{\frac{Gm^3}{\hbar^2 a}}.
+$$
+
+### Boundary radius
+The boundary radius $R$ is defined as the radius where $\rho(R) = 0$,
+
+$$
+\sin(kR) = 0 \implies R = \frac{\pi}{k} = \pi\sqrt{\frac{\hbar^2 a}{G m^3}}.
+$$
+
+### Circular velocity
+
+The circular velocity is given by
+
+$$
+v_c^2 = \frac{GM(<r)}{r} = \frac{4\pi G\rho_c}{k^2}\left(\frac{\sin(kr)}{kr} - \cos(kr)\right), \quad r \le \pi/k.
+$$
+
+![Fermi gas circular velocity](assets/generated/fermi_gas_vcirc.png)
+
+*Figure 2.13: Circular velocity profile of the Fermi gas model with $R=15kp$ and $M=10^{11}M_\odot$.*
+
+
+Script to generate figure:
+
+```python
+from galactic_dynamics_bovy.chapter02.fermi_gas_vcirc import plot_fermi_gas_vcirc
+plot_fermi_gas_vcirc()
+```

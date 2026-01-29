@@ -14,6 +14,7 @@ from pathlib import Path
 
 # Import chapter modules to trigger decorator registration
 import galactic_dynamics_bovy.chapter02.effective_radius_gamma
+import galactic_dynamics_bovy.chapter02.fermi_gas_vcirc
 import galactic_dynamics_bovy.chapter02.ic_2574
 import galactic_dynamics_bovy.chapter02.nbody_1d
 import galactic_dynamics_bovy.chapter02.rvir_mvir
