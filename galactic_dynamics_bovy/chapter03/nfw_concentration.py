@@ -429,24 +429,3 @@ def solve_concentration_from_vesc(
     v_esc_predicted = nfw_vesc_to_r200(r_inner, m200, c, r200, units.G_kms)
 
     return SolvedNFWModel(c=c, m200=m200, r200=r200, a=a, v_esc_predicted=v_esc_predicted)
-
-
-if __name__ == "__main__":
-    # Example usage
-    solved_model = solve_concentration()
-    print(f"Solved concentration: c = {solved_model.c:.3f}")
-    print(f"M_200 = {solved_model.m200:.3e} x 10^10 M_sun")
-    print(f"R_200 = {solved_model.r200:.3f} kpc")
-    print(f"Scale radius a = {solved_model.a:.3f} kpc")
-    print(f"Predicted v_esc(8 kpc) = {solved_model.v_esc_predicted:.3f} km/s")
-    print(solved_model)
-
-    # Solve using escape velocity constraint
-    solved_model_vesc = solve_concentration_from_vesc()
-    print("\nUsing escape velocity constraint:")
-    print(f"Solved concentration: c = {solved_model_vesc.c:.3f}")
-    print(f"M_200 = {solved_model_vesc.m200:.3e} x 10^10 M_sun")
-    print(f"R_200 = {solved_model_vesc.r200:.3f} kpc")
-    print(f"Scale radius a = {solved_model_vesc.a:.3f} kpc")
-    print(f"Predicted v_esc(8 kpc) = {solved_model_vesc.v_esc_predicted:.3f} km/s")
-    print(solved_model_vesc)
