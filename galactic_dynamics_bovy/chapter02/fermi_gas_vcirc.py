@@ -4,20 +4,20 @@ This module computes the circular velocity curve for a self-gravitating
 degenerate Fermi gas (polytrope with n=1), as derived in Problem 2.13.
 
 The density profile is:
-    ρ(r) = ρ_c sinc(kr)
+    rho(r) = rho_c sinc(kr)
 
-where k = π/R and R is the boundary radius where ρ(R) = 0.
+where k = pi/R and R is the boundary radius where rho(R) = 0.
 
 The circular velocity is:
-    v_c² = (4πGρ_c/k²) * (sinc(kr) - cos(kr))  for r ≤ R
-    v_c² = GM/r                                 for r > R  (Keplerian)
+    v_c^2 = (4*pi*G*rho_c/k^2) * (sinc(kr) - cos(kr))  for r <= R
+    v_c^2 = GM/r                                        for r > R  (Keplerian)
 
 The total mass is:
-    M = 4ρ_c R³/π
+    M = 4*rho_c*R^3/pi
 
 So given M and R, we can derive:
-    ρ_c = πM/(4R³)
-    k = π/R
+    rho_c = pi*M/(4*R^3)
+    k = pi/R
 """
 
 from pathlib import Path
@@ -49,7 +49,7 @@ def get_fermi_gas_params(
     Returns
     -------
     rho_c : float
-        Central density in 10^10 Msun / kpc³.
+        Central density in 10^10 Msun / kpc^3.
     k : float
         Wave number in 1/kpc.
     """
@@ -71,11 +71,11 @@ def vcirc_fermi_gas(
     r : ndarray
         Radius in kpc.
     rho_c : float
-        Central density in 10^10 Msun / kpc³.
+        Central density in 10^10 Msun / kpc^3.
     k : float
         Wave number in 1/kpc.
     G : float
-        Gravitational constant in kpc (km/s)² / (10^10 Msun).
+        Gravitational constant in kpc (km/s)^2 / (10^10 Msun).
 
     Returns
     -------
@@ -88,16 +88,16 @@ def vcirc_fermi_gas(
 
     vc_squared = np.zeros_like(r)
 
-    # Inside boundary: v_c² = (4πGρ_c/k²) * (sinc(kr) - cos(kr))
+    # Inside boundary: v_c^2 = (4*pi*G*rho_c/k^2) * (sinc(kr) - cos(kr))
     if np.any(inside):
         kr = k * r[inside]
         with np.errstate(divide="ignore", invalid="ignore"):
-            sinc_kr = np.sinc(kr / np.pi)  # np.sinc(x) = sin(πx)/(πx)
+            sinc_kr = np.sinc(kr / np.pi)  # np.sinc(x) = sin(pi*x)/(pi*x)
             term = sinc_kr - np.cos(kr)
         vc_squared[inside] = 4 * np.pi * G * rho_c / k**2 * term
 
-    # Outside boundary: v_c² = GM/r (Keplerian)
-    # Total mass M = 4π²ρ_c/k³
+    # Outside boundary: v_c^2 = GM/r (Keplerian)
+    # Total mass M = 4*pi^2*rho_c/k^3
     if np.any(~inside):
         total_mass = 4 * np.pi**2 * rho_c / k**3
         vc_squared[~inside] = G * total_mass / r[~inside]

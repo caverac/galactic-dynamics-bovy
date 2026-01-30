@@ -22,7 +22,7 @@ class TestNfwF:
         assert np.isclose(result[0], 0.0, atol=1e-10)
 
     def test_f_at_one(self) -> None:
-        """f(1) = ln(2) - 0.5 ≈ 0.193."""
+        """f(1) = ln(2) - 0.5 ~ 0.193."""
         result = _nfw_f(np.array([1.0]))
         expected = np.log(2) - 0.5
         assert np.isclose(result[0], expected)
@@ -103,7 +103,7 @@ class TestGetRvirMvirDelta:
         assert np.all(np.diff(mvir) > 0)
 
     def test_delta_200_gives_reasonable_rvir(self) -> None:
-        """At Δ≈200, rvir should be around 90-100 kpc for MW-like halo."""
+        """At Delta~200, rvir should be around 90-100 kpc for MW-like halo."""
         units = GalacticUnits(h=1.0)
         rvir, _, delta = get_rvir_mvir_delta(0.00035, 16.0, units.rho_crit, rvir_range=(50, 200))
 
@@ -114,7 +114,7 @@ class TestGetRvirMvirDelta:
         assert 80 < rvir_200 < 120
 
     def test_mvir_formula_consistency(self) -> None:
-        """M_vir = (4π/3) r³ ρ_crit Δ should hold."""
+        """M_vir = (4*pi/3) r^3 rho_crit Delta should hold."""
         units = GalacticUnits(h=1.0)
         rvir, mvir, delta = get_rvir_mvir_delta(0.00035, 16.0, units.rho_crit)
 

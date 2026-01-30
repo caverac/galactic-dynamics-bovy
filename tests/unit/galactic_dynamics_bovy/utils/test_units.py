@@ -22,12 +22,12 @@ class TestStellarUnitsClassConstants:
         assert StellarUnits.G > 0
 
     def test_G_matches_astropy(self) -> None:
-        """G should match astropy conversion to pc³/(Msun Myr²)."""
+        """G should match astropy conversion to pc^3/(Msun Myr^2)."""
         expected = float(_G.to(u.pc**3 / u.Msun / u.Myr**2).value)
         assert StellarUnits.G == expected
 
     def test_G_kms_matches_astropy(self) -> None:
-        """G_kms should match astropy conversion to pc (km/s)²/Msun."""
+        """G_kms should match astropy conversion to pc (km/s)^2/Msun."""
         expected = float(_G.to(u.pc * (u.km / u.s) ** 2 / u.Msun).value)
         assert StellarUnits.G_kms == expected
 
@@ -80,7 +80,7 @@ class TestStellarUnitsInstance:
         assert s.rho_crit > 0
 
     def test_rho_crit_scales_with_h_squared(self) -> None:
-        """Critical density should scale as h²."""
+        """Critical density should scale as h^2."""
         s1 = StellarUnits(h=0.7)
         s2 = StellarUnits(h=1.0)
         assert np.isclose(s2.rho_crit / s1.rho_crit, (1.0 / 0.7) ** 2)
@@ -124,12 +124,12 @@ class TestGalacticUnitsClassConstants:
         assert GalacticUnits.G > 0
 
     def test_G_matches_astropy(self) -> None:
-        """G should match astropy conversion to kpc³/(10^10 Msun Gyr²)."""
+        """G should match astropy conversion to kpc^3/(10^10 Msun Gyr^2)."""
         expected = float(_G.to(u.kpc**3 / _M10 / u.Gyr**2).value)
         assert GalacticUnits.G == expected
 
     def test_G_kms_matches_astropy(self) -> None:
-        """G_kms should match astropy conversion to kpc (km/s)²/(10^10 Msun)."""
+        """G_kms should match astropy conversion to kpc (km/s)^2/(10^10 Msun)."""
         expected = float(_G.to(u.kpc * (u.km / u.s) ** 2 / _M10).value)
         assert GalacticUnits.G_kms == expected
 
@@ -182,7 +182,7 @@ class TestGalacticUnitsInstance:
         assert g.rho_crit > 0
 
     def test_rho_crit_scales_with_h_squared(self) -> None:
-        """Critical density should scale as h²."""
+        """Critical density should scale as h^2."""
         g1 = GalacticUnits(h=0.7)
         g2 = GalacticUnits(h=1.0)
         assert np.isclose(g2.rho_crit / g1.rho_crit, (1.0 / 0.7) ** 2)
@@ -222,9 +222,9 @@ class TestUnitSystemConsistency:
     """Cross-checks between StellarUnits and GalacticUnits."""
 
     def test_G_ratio(self) -> None:
-        """G_galactic / G_stellar = (pc/kpc)³ × (M10/Msun) × (Gyr/Myr)² = 1e7."""
+        """G_galactic / G_stellar = (pc/kpc)^3 x (M10/Msun) x (Gyr/Myr)^2 = 1e7."""
         ratio = GalacticUnits.G / StellarUnits.G
-        # pc³→kpc³: (1e-3)³=1e-9, Msun→M10: 1e10, Myr²→Gyr²: (1e3)²=1e6
+        # pc^3->kpc^3: (1e-3)^3=1e-9, Msun->M10: 1e10, Myr^2->Gyr^2: (1e3)^2=1e6
         expected = 1e-9 * 1e10 * 1e6
         assert np.isclose(ratio, expected)
 
@@ -234,10 +234,10 @@ class TestUnitSystemConsistency:
         assert np.isclose(GalacticUnits.c, StellarUnits.c)
 
     def test_rho_crit_ratio(self) -> None:
-        """rho_crit ratio should reflect mass/length³ unit change."""
+        """rho_crit ratio should reflect mass/length^3 unit change."""
         s = StellarUnits()
         g = GalacticUnits()
-        # Msun/pc³ → (10^10 Msun)/kpc³ requires factor 1e-10 * (1e3)³ = 1e-1
+        # Msun/pc^3 -> (10^10 Msun)/kpc^3 requires factor 1e-10 * (1e3)^3 = 1e-1
         ratio = s.rho_crit / g.rho_crit
-        expected = 1e10 / (1e3) ** 3  # Msun/(10^10 Msun) * kpc³/pc³
+        expected = 1e10 / (1e3) ** 3  # Msun/(10^10 Msun) * kpc^3/pc^3
         assert np.isclose(ratio, expected)

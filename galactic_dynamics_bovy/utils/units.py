@@ -33,9 +33,9 @@ class StellarUnits:
     Attributes
     ----------
     G : float
-        Gravitational constant in pc³ / (Msun Myr²).
+        Gravitational constant in pc^3 / (Msun Myr^2).
     G_kms : float
-        Gravitational constant in pc (km/s)² / Msun.
+        Gravitational constant in pc (km/s)^2 / Msun.
     c : float
         Speed of light in pc / Myr.
     H0 : float
@@ -43,7 +43,7 @@ class StellarUnits:
     h : float
         Dimensionless Hubble parameter (H0 / 100 km/s/Mpc).
     rho_crit : float
-        Critical density in Msun / pc³.
+        Critical density in Msun / pc^3.
 
     Examples
     --------
@@ -100,9 +100,9 @@ class GalacticUnits:
     Attributes
     ----------
     G : float
-        Gravitational constant in kpc³ / (10^10 Msun Gyr²).
+        Gravitational constant in kpc^3 / (10^10 Msun Gyr^2).
     G_kms : float
-        Gravitational constant in kpc (km/s)² / (10^10 Msun).
+        Gravitational constant in kpc (km/s)^2 / (10^10 Msun).
     c : float
         Speed of light in kpc / Gyr.
     H0 : float
@@ -110,7 +110,7 @@ class GalacticUnits:
     h : float
         Dimensionless Hubble parameter (H0 / 100 km/s/Mpc).
     rho_crit : float
-        Critical density in 10^10 Msun / kpc³.
+        Critical density in 10^10 Msun / kpc^3.
 
     Examples
     --------

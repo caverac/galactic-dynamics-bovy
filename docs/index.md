@@ -20,8 +20,8 @@ Solutions are organized by chapter. Legend: ✅ Complete | 🚧  In Progress | �
 ### Part I: Basics of Galactic Dynamics
 
 - ✅ Chapter 1: Introduction
-- 🚧  Chapter 2: Gravitation
-- ⏳ Chapter 3: Elements of Classical Mechanics
+- ✅  Chapter 2: Gravitation
+- 🚧 Chapter 3: Elements of Classical Mechanics
 - ⏳ Chapter 4: Orbits in Spherical Mass Distributions
 - ⏳ Chapter 5: Equilibria of Collisionless Stellar Systems
 - ⏳ Chapter 6: Masses of Spherical Stellar Systems

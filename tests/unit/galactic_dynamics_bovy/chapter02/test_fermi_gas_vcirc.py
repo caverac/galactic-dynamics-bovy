@@ -23,7 +23,7 @@ class TestGetFermiGasParams:
         assert k > 0
 
     def test_k_gives_correct_boundary(self) -> None:
-        """k = π/R should give correct boundary radius."""
+        """k = pi/R should give correct boundary radius."""
         boundary_radius = 15.0
         _, k = get_fermi_gas_params(total_mass=10.0, boundary_radius=boundary_radius)
         assert np.isclose(np.pi / k, boundary_radius)
@@ -103,7 +103,7 @@ class TestVcircFermiGas:
         r = np.array([20.0, 30.0])
         vc = vcirc_fermi_gas(r, rho_c, k, units.G_kms)
 
-        # v_c² = GM/r, so v_c(r1)/v_c(r2) = sqrt(r2/r1)
+        # v_c^2 = GM/r, so v_c(r1)/v_c(r2) = sqrt(r2/r1)
         expected_ratio = np.sqrt(r[1] / r[0])
         assert np.isclose(vc[0] / vc[1], expected_ratio)
 

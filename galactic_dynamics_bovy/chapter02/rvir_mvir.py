@@ -61,7 +61,7 @@ def get_rvir_mvir_delta(
         delta = 3 (rho0/rho_crit) f(r_vir/a) / (r_vir/a)^3
 
     And the virial mass is:
-        M_vir = (4π/3) r_vir^3 rho_crit delta
+        M_vir = (4*pi/3) r_vir^3 rho_crit delta
 
     Parameters
     ----------

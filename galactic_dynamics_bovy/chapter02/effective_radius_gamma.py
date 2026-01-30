@@ -6,9 +6,9 @@ integration and interpolation.
 
 The key integrals are:
 
-    s(x) = (3 - γ) ∫_x^∞ dy y^(1-γ) / ((1 + y)^(4-γ) √(y² - x²))
+    s(x) = (3 - gamma) integral_x^inf dy y^(1-gamma) / ((1 + y)^(4-gamma) sqrt(y^2 - x^2))
 
-    m(x) = 2π ∫_0^x dx' s(x') x'
+    m(x) = 2*pi integral_0^x dx' s(x') x'
 
 The effective radius x_e satisfies m(x_e) = 1/2.
 """
@@ -73,7 +73,7 @@ def compute_s_direct(x: float, gamma: float) -> float:
 
 
 class SInterpolator:
-    """Interpolator for s(x) = (3-γ) ∫_x^∞ dy y^(1-γ) / ((1+y)^(4-γ) √(y²-x²)).
+    """Interpolator for s(x) = (3-gamma) integral_x^inf dy y^(1-gamma) / ((1+y)^(4-gamma) sqrt(y^2-x^2)).
 
     Parameters
     ----------
@@ -148,7 +148,7 @@ class SInterpolator:
 
 
 class MInterpolator:
-    """Interpolator for m(x) = 2π ∫_0^x dx' s(x') x'.
+    """Interpolator for m(x) = 2*pi integral_0^x dx' s(x') x'.
 
     Uses the SInterpolator and exploits logarithmic grid for integration.
 
@@ -167,10 +167,10 @@ class MInterpolator:
         self._log_x = s_interp._log_x.copy()
 
         # Compute m on the grid using cumulative trapezoid in log space
-        # m(x) = ∫_0^x s(x') x' dx'
+        # m(x) = integral_0^x s(x') x' dx'
         # With log grid: dx = x * ln(10) * d(log x)
-        # So: m(x) = ln(10) ∫ s(x') x'^2 d(log x')
-        # Note: s(x) is already normalized so ∫_0^∞ s(x) x dx = 1
+        # So: m(x) = ln(10) integral s(x') x'^2 d(log x')
+        # Note: s(x) is already normalized so integral_0^inf s(x) x dx = 1
 
         s_vals = s_interp._s_grid
         integrand = s_vals * self._x_grid**2
