@@ -11,6 +11,7 @@ Usage:
 """
 
 from pathlib import Path
+import re
 
 # Import chapter modules to trigger decorator registration
 import galactic_dynamics_bovy.chapter02.effective_radius_gamma
@@ -24,6 +25,16 @@ from galactic_dynamics_bovy.utils.assets import get_registered_assets
 
 ASSETS_DIR = Path(__file__).parent.parent / "docs" / "assets" / "generated"
 
+_CHAPTER_PATTERN = re.compile(r"\.chapter(\d+)\.")
+
+
+def _chapter_sort_key(item: tuple[str, tuple]) -> tuple[int, str]:
+    """Sort key to order assets by chapter number, then by name."""
+    output_name, (_, module_name) = item
+    match = _CHAPTER_PATTERN.search(module_name)
+    chapter_num = int(match.group(1)) if match else 999
+    return (chapter_num, output_name)
+
 
 def main() -> None:
     """Generate all documentation assets."""
@@ -35,8 +46,16 @@ def main() -> None:
 
     written = 0
     skipped = 0
+    current_chapter = None
 
-    for output_name, (plot_func, _) in sorted(assets.items()):
+    for output_name, (plot_func, module_name) in sorted(assets.items(), key=_chapter_sort_key):
+        match = _CHAPTER_PATTERN.search(module_name)
+        chapter = int(match.group(1)) if match else None
+        if chapter != current_chapter:
+            current_chapter = chapter
+            label = f"Chapter {chapter:02d}" if chapter else "Other"
+            print(f"{label}:")
+
         output_path = ASSETS_DIR / output_name
 
         # Check if file exists and get mtime before generation
@@ -56,5 +75,5 @@ def main() -> None:
     print(f"\nDone: {written} written, {skipped} unchanged")
 
 
-if __name__ == "__main__":
+if __name__ == "__main__":  # pragma: no cover
     main()

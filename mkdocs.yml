@@ -75,5 +75,7 @@ nav:
   - Chapter 2 | Gravitation:
       - Problems 1-10: chapter02.1.md
       - Problems 11-13: chapter02.2.md
-  - Chapter 3 | Classical Mechanics:
+  - Chapter 3 | Elements of classical mechanics:
       - Problems 1-6: chapter03.1.md
+  - Chapter 4 | Orbits in spherical mass distributions:
+      - Problems 1-10: chapter04.1.md

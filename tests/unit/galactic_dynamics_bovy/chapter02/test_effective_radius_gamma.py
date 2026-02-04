@@ -2,8 +2,10 @@
 
 from pathlib import Path
 from unittest.mock import MagicMock, patch
+import warnings
 
 import numpy as np
+from scipy.integrate import IntegrationWarning
 
 from galactic_dynamics_bovy.chapter02.effective_radius_gamma import (
     compute_effective_radius,
@@ -36,8 +38,10 @@ class TestComputeSDirect:
         assert s1 != s2
 
     def test_handles_x_zero(self) -> None:
-        """Should handle x=0 case."""
-        result = compute_s_direct(0.0, gamma=1.0)
+        """Should handle x=0 case (may produce integration warning due to singularity)."""
+        with warnings.catch_warnings():
+            warnings.filterwarnings("ignore", category=IntegrationWarning)
+            result = compute_s_direct(0.0, gamma=1.0)
         assert np.isfinite(result)
         assert result > 0
 
