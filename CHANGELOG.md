@@ -1,3 +1,13 @@
+## v0.5.0 (2026-01-30)
+
+### Feat
+
+- **chapter03**: completed problems 3.1-3.6
+
+### Fix
+
+- **fermi_gas_vcirc**: added handler for r > R
+
 ## v0.4.0 (2026-01-29)
 
 ### Feat
