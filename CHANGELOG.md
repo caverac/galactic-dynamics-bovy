@@ -1,3 +1,9 @@
+## v0.5.1 (2026-02-04)
+
+### Fix
+
+- **nfw_concentration**: remove __main__ block
+
 ## v0.5.0 (2026-01-30)
 
 ### Feat
