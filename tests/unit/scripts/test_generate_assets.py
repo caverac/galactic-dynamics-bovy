@@ -51,16 +51,19 @@ class TestMain:
 
     @patch("scripts.generate_assets.get_registered_assets")
     @patch("scripts.generate_assets.ASSETS_DIR", new_callable=MagicMock)
-    @patch("builtins.print")
+    @patch("scripts.generate_assets.Console")
     def test_reports_written_for_new_files(
         self,
-        mock_print: MagicMock,
+        mock_console_class: MagicMock,
         mock_assets_dir: MagicMock,
         mock_get_assets: MagicMock,
         tmp_path: Path,
     ) -> None:
         """Should report [WRITE] for newly created files."""
         from scripts.generate_assets import main
+
+        mock_console = MagicMock()
+        mock_console_class.return_value = mock_console
 
         def create_file(path: Path) -> None:
             path.write_text("content")
@@ -72,21 +75,24 @@ class TestMain:
         main()
 
         # Check that [WRITE] was printed
-        write_calls = [c for c in mock_print.call_args_list if "[WRITE]" in str(c)]
+        write_calls = [c for c in mock_console.print.call_args_list if "WRITE" in str(c)]
         assert len(write_calls) == 1
 
     @patch("scripts.generate_assets.get_registered_assets")
     @patch("scripts.generate_assets.ASSETS_DIR", new_callable=MagicMock)
-    @patch("builtins.print")
+    @patch("scripts.generate_assets.Console")
     def test_reports_skipped_for_unchanged_files(
         self,
-        mock_print: MagicMock,
+        mock_console_class: MagicMock,
         mock_assets_dir: MagicMock,
         mock_get_assets: MagicMock,
         tmp_path: Path,
     ) -> None:
         """Should report [SKIP] for files that weren't modified."""
         from scripts.generate_assets import main
+
+        mock_console = MagicMock()
+        mock_console_class.return_value = mock_console
 
         # Create file beforehand
         output_file = tmp_path / "existing_plot.png"
@@ -100,7 +106,7 @@ class TestMain:
         main()
 
         # Check that [SKIP] was printed
-        skip_calls = [c for c in mock_print.call_args_list if "[SKIP]" in str(c)]
+        skip_calls = [c for c in mock_console.print.call_args_list if "SKIP" in str(c)]
         assert len(skip_calls) == 1
 
     @patch("scripts.generate_assets.get_registered_assets")
