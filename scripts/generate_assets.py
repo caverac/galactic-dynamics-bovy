@@ -13,6 +13,8 @@ Usage:
 from pathlib import Path
 import re
 
+from rich.console import Console
+
 # Import chapter modules to trigger decorator registration
 import galactic_dynamics_bovy.chapter02.effective_radius_gamma
 import galactic_dynamics_bovy.chapter02.fermi_gas_vcirc
@@ -38,11 +40,13 @@ def _chapter_sort_key(item: tuple[str, tuple]) -> tuple[int, str]:
 
 def main() -> None:
     """Generate all documentation assets."""
+    console = Console()
+
     ASSETS_DIR.mkdir(parents=True, exist_ok=True)
-    print(f"Assets directory: {ASSETS_DIR}")
+    console.print(f"Assets directory: {ASSETS_DIR}")
 
     assets = get_registered_assets()
-    print(f"Found {len(assets)} registered assets\n")
+    console.print(f"Found {len(assets)} registered assets\n")
 
     written = 0
     skipped = 0
@@ -54,7 +58,7 @@ def main() -> None:
         if chapter != current_chapter:
             current_chapter = chapter
             label = f"Chapter {chapter:02d}" if chapter else "Other"
-            print(f"{label}:")
+            console.print(f"[bold]{label}:[/bold]")
 
         output_path = ASSETS_DIR / output_name
 
@@ -66,13 +70,13 @@ def main() -> None:
 
         # Check if file was actually written
         if not existed or output_path.stat().st_mtime != mtime_before:
-            print(f"  [WRITE] {output_name}")
+            console.print(f"  [green]\\[WRITE][/green] {output_name}")
             written += 1
         else:
-            print(f"  [SKIP]  {output_name} (unchanged)")
+            console.print(f"  [dim]\\[SKIP]  {output_name} (unchanged)[/dim]")
             skipped += 1
 
-    print(f"\nDone: {written} written, {skipped} unchanged")
+    console.print(f"\nDone: [green]{written} written[/green], [dim]{skipped} unchanged[/dim]")
 
 
 if __name__ == "__main__":  # pragma: no cover

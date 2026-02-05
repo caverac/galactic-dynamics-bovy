@@ -47,6 +47,7 @@ dev = [
     "pydocstyle>=6.3.0",
     "pre-commit>=3.0.0",
     "commitizen>=4.0.0",
+    "rich>=13.0.0",
 ]
 docs = [
     "mkdocs>=1.5.0",
