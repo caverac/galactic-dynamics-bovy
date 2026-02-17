@@ -96,7 +96,7 @@ def force_theory_uniform(
     return -4 * np.pi * G * total_mass * x
 
 
-@register_asset("nbody_1d_force.png")
+@register_asset("p02_08_nbody_1d_force.png")
 def plot_force_comparison(path: Path | None = None) -> None:
     """Plot comparison of numerical vs theoretical 1D gravitational force.
 

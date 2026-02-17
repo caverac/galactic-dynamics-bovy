@@ -72,7 +72,7 @@ def vcirc_nfw(x: npt.NDArray[np.float64]) -> npt.NDArray[np.float64]:
     return np.sqrt(f_x / x)
 
 
-@register_asset("vcirc_profiles.png")
+@register_asset("p02_05_vcirc_profiles.png")
 def plot_vcirc_profiles(path: Path | None = None) -> None:
     """Plot circular velocity curves for Jaffe, Hernquist, and NFW profiles.
 

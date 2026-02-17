@@ -70,7 +70,7 @@ def fit_linear_rotation(
     return result.slope, result.intercept
 
 
-@register_asset("ic2574_rotation_curve.png")
+@register_asset("p02_01_ic2574_rotation_curve.png")
 def plot_rotation_curve(path: Path | None = None) -> None:
     """Plot IC 2574 rotation curve with linear fit for r < 6 kpc.
 

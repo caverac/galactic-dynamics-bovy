@@ -64,7 +64,7 @@ def vcirc_exponential_disk(x: npt.NDArray[np.float64]) -> npt.NDArray[np.float64
     return 2.0 * y**2 * (i0(y) * k0(y) - i1(y) * k1(y))
 
 
-@register_asset("exponential_vcirc.png")
+@register_asset("p02_07_exponential_vcirc.png")
 def plot_exponential_vcirc(path: Path | None = None) -> None:
     """Plot circular velocity for spherical and true exponential disks.
 

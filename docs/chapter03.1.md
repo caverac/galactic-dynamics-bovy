@@ -134,7 +134,7 @@ $$
 T = \frac{1}{2}m\left(\dot{r}^2 + r^2\dot{\theta}^2 + r^2\sin^2\theta\dot{\phi}^2\right).
 $$
 
-In a conservative potential $\partial \mathcal{L} /\partial p_j = \partial \mathcal{T} /\partial p_j$, therefore the generalized momenta are
+In a conservative potential $\partial \mathcal{L} /\partial p_j = \partial T /\partial p_j$, therefore the generalized momenta are
 
 $$
 \begin{align}

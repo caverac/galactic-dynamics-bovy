@@ -264,7 +264,7 @@ def compute_effective_radius(gamma: float, normalize: bool = True) -> float:
     return effective_radius
 
 
-@register_asset("effective_radius_gamma.png")
+@register_asset("p02_12_effective_radius_gamma.png")
 def plot_effective_radius_gamma(*, path: Path | None = None) -> None:
     """Plot effective radius as a function of gamma.
 

@@ -23,6 +23,7 @@ import galactic_dynamics_bovy.chapter02.nbody_1d
 import galactic_dynamics_bovy.chapter02.rvir_mvir
 import galactic_dynamics_bovy.chapter02.spherical_exponential
 import galactic_dynamics_bovy.chapter02.vcirc_profiles
+import galactic_dynamics_bovy.chapter03.planet_comet_scattering
 from galactic_dynamics_bovy.utils.assets import get_registered_assets
 
 ASSETS_DIR = Path(__file__).parent.parent / "docs" / "assets" / "generated"

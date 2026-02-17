@@ -94,7 +94,7 @@ def get_rvir_mvir_delta(
     return rvir, mvir, delta
 
 
-@register_asset("nfw_rvir_mvir_delta.png")
+@register_asset("p02_02_nfw_rvir_mvir_delta.png")
 def plot_rvir_mvir_delta(path: Path | None = None) -> None:
     """Plot virial mass and radius vs overdensity for an NFW halo.
 

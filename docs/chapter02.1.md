@@ -11,7 +11,7 @@ $$
 v_c(r) = \sqrt{\frac{4\pi G \rho_0}{3}} r
 $$
 
-![IC 2574 Rotation Curve](assets/generated/ic2574_rotation_curve.png)
+![IC 2574 Rotation Curve](assets/generated/p02_01_ic2574_rotation_curve.png)
 
 *Figure 2.1: Data from the THINGS survey [@deblok2008] shows that the circular velocity rises approximately linearly with radius for $r < 6$ kpc. Linear fit shown in dashed line.*
 
@@ -51,7 +51,7 @@ $$
 
 The expression $r_{\mathrm{vir}} = a c(y)$ then gives the virial radius as a function of overdensity $\Delta_v$. However, there is no closed-form solution for $c(y)$, so we must solve numerically.
 
-![NFW Virial Mass and Radius](assets/generated/nfw_rvir_mvir_delta.png)
+![NFW Virial Mass and Radius](assets/generated/p02_02_nfw_rvir_mvir_delta.png)
 
 *Figure 2.2: Virial mass (top) and virial radius (bottom) as a function of overdensity $\Delta_v$ for an NFW halo with $\rho_0 = 3.5 \times 10^6\,M_\odot/\mathrm{kpc}^3$ and scale radius $a = 16$ kpc. At $\Delta_v = 200$, this halo has $r_{\mathrm{vir}} \approx 95$ kpc and $M_{\mathrm{vir}} \approx 2 \times 10^{11}\,M_\odot$.*
 
@@ -214,7 +214,7 @@ $$
 
 ### Circular velocity
 
-![Circular Velocity Profiles](assets/generated/vcirc_profiles.png)
+![Circular Velocity Profiles](assets/generated/p02_05_vcirc_profiles.png)
 
 *Figure 2.5: Normalized circular velocity as a function of $r/a$ for Jaffe, Hernquist, and NFW profiles. The Jaffe profile has a monotonically decreasing rotation curve, while Hernquist and NFW rise at small radii before declining.*
 
@@ -341,7 +341,7 @@ $$
 
 where $I_n$ and $K_n$ are modified Bessel functions.
 
-![Exponential Disk Velocity Curves](assets/generated/exponential_vcirc.png)
+![Exponential Disk Velocity Curves](assets/generated/p02_07_exponential_vcirc.png)
 
 *Figure 2.7: Normalized circular velocity as a function of $R/R_d$ for the spherical exponential disk (solid) and the true exponential disk (dashed). The spherical approximation peaks at smaller radius than the true disk.*
 
@@ -425,7 +425,7 @@ $$
 F(x) = -4\pi G M x.
 $$
 
-![1D N-body Force Comparison](assets/generated/nbody_1d_force.png)
+![1D N-body Force Comparison](assets/generated/p02_08_nbody_1d_force.png)
 
 *Figure 2.8: Comparison of numerical vs theoretical gravitational force for $N = 10000$ particles uniformly distributed on $[-1/2, 1/2]$. The error $(F_{\mathrm{numerical}} - F_{\mathrm{theory}}) / (4 \pi G M)$ stays close to zero across the distribution.*
 

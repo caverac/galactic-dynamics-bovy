@@ -106,7 +106,7 @@ def vcirc_fermi_gas(
     return np.sqrt(vc_squared)
 
 
-@register_asset("fermi_gas_vcirc.png")
+@register_asset("p02_13_fermi_gas_vcirc.png")
 def plot_fermi_gas_vcirc(*, path: Path | None = None) -> None:
     """Plot circular velocity for a Fermi gas with M=1e11 Msun, R=15 kpc.
 

@@ -90,7 +90,7 @@ from galactic_dynamics_bovy.chapter02.effective_radius_gamma import plot_effecti
 plot_effective_radius_gamma()
 ```
 
-![Effective radius Gamma model](assets/generated/effective_radius_gamma.png)
+![Effective radius Gamma model](assets/generated/p02_12_effective_radius_gamma.png)
 
 *Figure 2.12: Effective radius as a function of $\gamma$. For large $\gamma$ the mass becomes more centrally concentrated, which makes numerically convergence a bit more challenging. Line $R_e/r_{1/2} = 3/4$ added for reference.*
 
@@ -160,7 +160,7 @@ $$
 v_c^2 = \frac{GM(<r)}{r} = \frac{4\pi G\rho_c}{k^2}\left(\frac{\sin(kr)}{kr} - \cos(kr)\right), \quad r \le \pi/k.
 $$
 
-![Fermi gas circular velocity](assets/generated/fermi_gas_vcirc.png)
+![Fermi gas circular velocity](assets/generated/p02_13_fermi_gas_vcirc.png)
 
 *Figure 2.13: Circular velocity profile of the Fermi gas model with $R=15\, \mathrm{kpc}$ and $M=10^{11}\, \mathrm{M}_\odot$.*
 
