@@ -231,7 +231,9 @@ class TestPlotOrbitComparison:
     """Tests for plot_orbit_comparison function."""
 
     @staticmethod
-    def _setup_mocks(mock_plt, mock_integrate, mock_kick, mock_find_peri):
+    def _setup_mocks(
+        mock_plt: MagicMock, mock_integrate: MagicMock, mock_kick: MagicMock, mock_find_peri: MagicMock
+    ) -> tuple[MagicMock, MagicMock, MagicMock]:
         """Set up common mocks for orbit comparison tests."""
         mock_fig = MagicMock()
         mock_ax1 = MagicMock()
@@ -261,7 +263,9 @@ class TestPlotOrbitComparison:
     @patch("galactic_dynamics_bovy.chapter03.planet_comet_scattering.apply_kick_at_pericenter")
     @patch("galactic_dynamics_bovy.chapter03.planet_comet_scattering.integrate_orbit")
     @patch("galactic_dynamics_bovy.chapter03.planet_comet_scattering.plt")
-    def test_creates_figure(self, mock_plt, mock_integrate, mock_kick, mock_find_peri) -> None:
+    def test_creates_figure(
+        self, mock_plt: MagicMock, mock_integrate: MagicMock, mock_kick: MagicMock, mock_find_peri: MagicMock
+    ) -> None:
         """Verify a figure is created."""
         self._setup_mocks(mock_plt, mock_integrate, mock_kick, mock_find_peri)
         plot_orbit_comparison()
@@ -271,7 +275,9 @@ class TestPlotOrbitComparison:
     @patch("galactic_dynamics_bovy.chapter03.planet_comet_scattering.apply_kick_at_pericenter")
     @patch("galactic_dynamics_bovy.chapter03.planet_comet_scattering.integrate_orbit")
     @patch("galactic_dynamics_bovy.chapter03.planet_comet_scattering.plt")
-    def test_shows_plot_when_no_path(self, mock_plt, mock_integrate, mock_kick, mock_find_peri) -> None:
+    def test_shows_plot_when_no_path(
+        self, mock_plt: MagicMock, mock_integrate: MagicMock, mock_kick: MagicMock, mock_find_peri: MagicMock
+    ) -> None:
         """Verify plt.show() is called when no path provided."""
         self._setup_mocks(mock_plt, mock_integrate, mock_kick, mock_find_peri)
         plot_orbit_comparison(path=None)
@@ -281,7 +287,9 @@ class TestPlotOrbitComparison:
     @patch("galactic_dynamics_bovy.chapter03.planet_comet_scattering.apply_kick_at_pericenter")
     @patch("galactic_dynamics_bovy.chapter03.planet_comet_scattering.integrate_orbit")
     @patch("galactic_dynamics_bovy.chapter03.planet_comet_scattering.plt")
-    def test_saves_figure_when_path_provided(self, mock_plt, mock_integrate, mock_kick, mock_find_peri) -> None:
+    def test_saves_figure_when_path_provided(
+        self, mock_plt: MagicMock, mock_integrate: MagicMock, mock_kick: MagicMock, mock_find_peri: MagicMock
+    ) -> None:
         """Verify figure is saved when path provided."""
         mock_fig, _, _ = self._setup_mocks(mock_plt, mock_integrate, mock_kick, mock_find_peri)
         test_path = Path("/tmp/test_orbit_comparison.png")
@@ -293,7 +301,9 @@ class TestPlotOrbitComparison:
     @patch("galactic_dynamics_bovy.chapter03.planet_comet_scattering.apply_kick_at_pericenter")
     @patch("galactic_dynamics_bovy.chapter03.planet_comet_scattering.integrate_orbit")
     @patch("galactic_dynamics_bovy.chapter03.planet_comet_scattering.plt")
-    def test_sets_labels(self, mock_plt, mock_integrate, mock_kick, mock_find_peri) -> None:
+    def test_sets_labels(
+        self, mock_plt: MagicMock, mock_integrate: MagicMock, mock_kick: MagicMock, mock_find_peri: MagicMock
+    ) -> None:
         """Verify axis labels are set."""
         _, mock_ax1, mock_ax2 = self._setup_mocks(mock_plt, mock_integrate, mock_kick, mock_find_peri)
         plot_orbit_comparison()
@@ -306,7 +316,9 @@ class TestPlotOrbitComparison:
     @patch("galactic_dynamics_bovy.chapter03.planet_comet_scattering.apply_kick_at_pericenter")
     @patch("galactic_dynamics_bovy.chapter03.planet_comet_scattering.integrate_orbit")
     @patch("galactic_dynamics_bovy.chapter03.planet_comet_scattering.plt")
-    def test_has_legend(self, mock_plt, mock_integrate, mock_kick, mock_find_peri) -> None:
+    def test_has_legend(
+        self, mock_plt: MagicMock, mock_integrate: MagicMock, mock_kick: MagicMock, mock_find_peri: MagicMock
+    ) -> None:
         """Verify legend is added on the x-y panel."""
         _, mock_ax1, _ = self._setup_mocks(mock_plt, mock_integrate, mock_kick, mock_find_peri)
         plot_orbit_comparison()

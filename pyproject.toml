@@ -80,6 +80,9 @@ ignore_missing_imports = true
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "--doctest-modules --cov=galactic_dynamics_bovy --cov-report=term-missing --cov-fail-under=100"
+filterwarnings = [
+    "ignore:Using C implementation to integrate orbits:galpy.util.galpyWarningVerbose",
+]
 
 [tool.pylint.format]
 max-line-length = 120
