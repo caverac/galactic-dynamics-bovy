@@ -1,3 +1,9 @@
+## v0.6.1 (2026-02-17)
+
+### Fix
+
+- **mkdocs**: removed floating reference to section
+
 ## v0.6.0 (2026-02-17)
 
 ### Feat
