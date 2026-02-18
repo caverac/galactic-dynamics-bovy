@@ -244,6 +244,105 @@ J_\theta &= \frac{2L}{\pi}\left[\left(u_0^2 - 1\right)\cdot\frac{\pi L}{2|L_z|} 
 \end{align}
 $$
 
+<!-- ======================= -->
+<!-- PROBLEM 4.5             -->
+<!-- ======================= -->
+## Problem 4.5
+
+For large $b$
+
+$$
+\sqrt{b^2 + r^2} = b\sqrt{1 + \frac{r^2}{b^2}} = b\left(1 + \frac{1}{2}\frac{r^2}{b^2} - O(b^{-4}\right),
+$$
+
+so
+
+$$
+b + \sqrt{b^2 + r^2} = 2b + \frac{r^2}{2b} - O(b^{-3}),
+$$
+
+and the potential becomes
+
+$$
+\begin{align}
+\Phi(r) &= -\frac{GM}{b + \sqrt{b^2 + r^2}} \\
+&= -\frac{GM}{2b}\left(1 - \frac{r^2}{4b^2} + O(b^{-4})\right) \\
+&= -\frac{GM}{2b} + \frac{GM}{8b^3}r^2 + O(b^{-5}).
+\end{align}
+$$
+
+Up to an additive constant, this is a homogeneous sphere potential with $\omega^2 = GM/(4b^3)$. But the key point is that we must keep $GM/b^3$ fixed as $b \to \infty$ to get a non-trivial limit, in other words $M$ must scale as $b^3$ for the isochrone to approach a homogeneous sphere.
+
+The "paradox" arises if we try to keep $M$ fixed as $b \to \infty$, the potential becomes trivial $\Phi(r) \to 0$, bound orbits disapper and trying to reason about perior becomes a meaningless exercise.
+
+Note that $\Phi(0) = -GM/(2b) \to 0$ as $b \to \infty$, the depth of the potential well goes to zero if $M$ is fixed, abd tge bound energy windoe squeezes to zero, so holding $E$ fixed as $b \to \infty$ also leads to a trivial limit. The comparison is to hold the oscillator energy above the minimum $E - \Phi(0) = E + GM/(2b)$ fixed as $b \to \infty$.
+
+<!-- ======================= -->
+<!-- PROBLEM 4.6             -->
+<!-- ======================= -->
+## Problem 4.6
+
+
+The Lagrangian for two gravitating point masses is
+
+$$
+\mathcal{L} = \frac{1}{2}m_1 \dot{\mathbf{x}}_1^2 + \frac{1}{2}m_2 \dot{\mathbf{x}}_2^2 + \frac{Gm_1 m_2}{|\mathbf{x}_2 - \mathbf{x}_1|}.
+$$
+
+Define the center-of-mass and relative coordinates
+
+$$
+\mathbf{x}_{\mathrm{cm}} = \frac{m_1 \mathbf{x}_1 + m_2 \mathbf{x}_2}{M}, \qquad \mathbf{r} = \mathbf{x}_2 - \mathbf{x}_1,
+$$
+
+where $M = m_1 + m_2$. Inverting,
+
+$$
+\mathbf{x}_1 = \mathbf{x}_{\mathrm{cm}} - \frac{m_2}{M}\mathbf{r}, \qquad \mathbf{x}_2 = \mathbf{x}_{\mathrm{cm}} + \frac{m_1}{M}\mathbf{r}.
+$$
+
+The kinetic energy becomes
+
+$$
+\begin{align}
+T &= \frac{1}{2}m_1\left(\dot{\mathbf{x}}_{\mathrm{cm}} - \frac{m_2}{M}\dot{\mathbf{r}}\right)^2 + \frac{1}{2}m_2\left(\dot{\mathbf{x}}_{\mathrm{cm}} + \frac{m_1}{M}\dot{\mathbf{r}}\right)^2 \\
+&= \frac{1}{2}(m_1 + m_2)\dot{\mathbf{x}}_{\mathrm{cm}}^2 + \frac{1}{2}\frac{m_1 m_2}{M}\dot{\mathbf{r}}^2.
+\end{align}
+$$
+
+Defining the reduced mass $\mu = m_1 m_2 / M$,
+
+$$
+\mathcal{L} = \frac{1}{2}M\dot{\mathbf{x}}_{\mathrm{cm}}^2 + \frac{1}{2}\mu\dot{\mathbf{r}}^2 + \frac{G\mu M}{|\mathbf{r}|}.
+$$
+
+The center-of-mass coordinate is cyclic ($\mathcal{L}$ does not depend on $\mathbf{x}_{\mathrm{cm}}$), so $M\dot{\mathbf{x}}_{\mathrm{cm}} = \text{const}$ and the first term is a constant of motion. The non-trivial dynamics is therefore governed by
+
+$$
+\mathcal{L}_{\mathrm{rel}} = \frac{1}{2}\mu\dot{\mathbf{r}}^2 + \frac{G\mu M}{|\mathbf{r}|},
+$$
+
+which is the Lagrangian of a particle of mass $\mu$ moving in the gravitational field of a fixed mass $M = m_1 + m_2$.
+
+<!-- ======================= -->
+<!-- PROBLEM 4.7             -->
+<!-- ======================= -->
+## Problem 4.7
+
+We increase the mass with $M(t) = A(t) M_0$ where $A(t)$ is a smooth function that transitions from $1$ to $2$ around some time $t_{\rm mid}$, for example
+
+$$
+A(t) = \frac{3}{2} + \frac{1}{2}\tanh\!\left(\frac{t - t_{\rm mid}}{\tau}\right),
+$$
+
+so the potential at time $t$ is $\Phi(r,t) = A(t)\,\Phi_0(r)$ with $A$ going from $1$ to $2$. The parameter $\tau$ sets how fast the transition is compared to the orbital period $T_{\rm orb}$.
+
+At each snapshot time $t_i$ we freeze the potential at its instantaneous amplitude $A(t_i)$ and compute the radial action
+
+![Adiabatic Isochrone](assets/generated/p04_07_adiabatic_isochrone.png)
+
+- **Left column (slow ramp, $\tau = 10\,T_{\rm orb}$):** The radial action $J_r$ stays nearly constant through the mass doubling — the adiabatic invariant is conserved. The orbit shrinks (smaller $R$) as the potential deepens, but does so in a way that preserves $J_r$.
+- **Right column (fast ramp, $\tau = 0.1\,T_{\rm orb}$):** The mass doubles in a fraction of an orbital period. The orbit has no time to adjust adiabatically, and $J_r$ jumps to a new, larger value. The shaded band marks the ramp window.
 
 <!-- ======================= -->
 <!-- PROBLEM 4.10            -->
