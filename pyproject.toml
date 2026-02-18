@@ -1,6 +1,6 @@
 [project]
 name = "galactic-dynamics-bovy"
-version = "0.6.1"
+version = "0.7.0"
 description = "Solutions to problems from Dynamics and Astrophysics of Galaxies by Jo Bovy (Princeton University Press)"
 readme = "README.md"
 license = "MIT"
