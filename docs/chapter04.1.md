@@ -345,6 +345,156 @@ At each snapshot time $t_i$ we freeze the potential at its instantaneous amplitu
 - **Right column (fast ramp, $\tau = 0.1\,T_{\rm orb}$):** The mass doubles in a fraction of an orbital period. The orbit has no time to adjust adiabatically, and $J_r$ jumps to a new, larger value. The shaded band marks the ramp window.
 
 <!-- ======================= -->
+<!-- PROBLEM 4.8             -->
+<!-- ======================= -->
+## Problem 4.8
+
+### Part a
+
+Let's start from
+
+$$
+u'' + u = -\frac{F(1/u)}{L^2 u^2},
+$$
+
+where $u = 1/r$ and
+
+$$
+F(r) = -GM\left( \frac{1}{r^2} + \frac{2a}{r^3} \right).
+$$
+
+Therefore
+
+$$
+u'' + u = \frac{GM}{L^2}(1 + 2au),
+$$
+
+or equivalently
+
+$$
+u'' + \frac{1}{K^2}u = \frac{GM}{L^2} \qquad \text{where} \qquad \frac{1}{K^2} = 1 - \frac{2aGM}{L^2}. \tag{4.8.1}
+$$
+
+Solutions to this equation are of the form
+
+$$
+u = C \cos\left(\frac{\psi - \psi_0}{K}\right) + \frac{GM K^2}{L^2} = \frac{1}{r} \tag{4.8.2}
+$$
+
+To find the constant $C$, note that
+
+$$
+E = \frac{1}{2}\dot{r}^2 + \frac{L^2}{2r^2} + \Phi(r) = \frac{1}{2}\dot{r}^2 + \frac{L^2}{2r^2} - \frac{GM}{r} - \frac{aGM}{r^2}.
+$$
+
+We can write this in terms of $u$ by noting that
+
+$$
+\dot{r} = \frac{dr}{d\psi}\dot{\psi} = -\frac{1}{u^2}\frac{du}{d\psi}\frac{L}{r^2} = -L\frac{du}{d\psi},
+$$
+
+so that
+
+$$
+\begin{align}
+L^2\left(\frac{du}{d\psi}\right)^2 &= 2E + 2GMu - (L^2 - 2aGM)u^2 \\
+&\stackrel{(4.8.1)}{=} 2E + 2GMu - \frac{L^2}{K^2}u^2
+\end{align}
+$$
+
+Using Eqn. (4.8.2) to substitute for $u$ and $du/d\psi$
+
+$$
+\begin{align}
+\frac{L^2C^2}{K^2}\sin^2\left(\frac{\psi - \psi_0}{K}\right) &= 2E + 2GM\left(C \cos\left(\frac{\psi - \psi_0}{K}\right) + \frac{GM K^2}{L^2}\right) \\
+&\quad - \frac{L^2}{K^2}\left(C \cos\left(\frac{\psi - \psi_0}{K}\right) + \frac{GM K^2}{L^2}\right)^2 \\
+&= 2E + \frac{G^2M^2K^2}{L^2} - \frac{L^2 C^2}{K^2}\cos^2\left(\frac{\psi - \psi_0}{K}\right).
+\end{align}
+$$
+
+Rearranging
+
+$$
+\frac{L^2C^2}{K^2} = 2E + \frac{G^2M^2K^2}{L^2} \quad \Rightarrow \quad E = \frac{L^2C^2}{2K^2} - \frac{1}{2}\left(\frac{GMK}{L}\right)^2
+$$
+
+### Part b
+
+An integral of motion is any quantity $I(\mathbf{x}, \mathbf{v})$ that (i) depends only on the current phase-space coordinates and (ii) is conserved along the orbit. $\psi_0$ satisfies both conditions:
+
+From Eqn. (4.8.2) and its derivative with respect to $\psi$,
+
+$$
+u - \frac{GMK^2}{L^2} = C\cos\left(\frac{\psi - \psi_0}{K}\right), \qquad \frac{du}{d\psi} = -\frac{C}{K}\sin\left(\frac{\psi - \psi_0}{K}\right),
+$$
+
+we can divide and solve for $\psi_0$:
+
+$$
+\psi_0 = \psi - K\mathrm{atan2}\left(-K\frac{du}{d\psi}, u - \frac{GMK^2}{L^2}\right).
+$$
+
+Since $u = 1/r$ and $du/d\psi = -\dot{r}/L$ (from Part a), this becomes
+
+$$
+\psi_0 = \psi - K\mathrm{atan2}\left(\frac{K\dot{r}}{L}, \dfrac{1}{r} - \dfrac{GMK^2}{L^2}\right),
+$$
+
+which expresses $\psi_0$ entirely in terms of the current phase-space coordinates $(r, \psi, \dot{r}, L)$, with no explicit time dependence. Since $\psi_0$ is also constant along the orbit by construction (it is a constant of integration of the orbit equation), it satisfies both conditions and is therefore an integral of motion.
+
+This is analogous to the Laplace–Runge–Lenz vector in the Kepler problem: when $a = 0$ (so $K = 1$), $\psi_0$ gives the azimuthal angle of pericenter, encoding the same orientational information as the Runge–Lenz vector direction.
+
+### Part c
+
+For simplicity call $u_0 = GMK^2/L^2$, Eqn. (4.8.2) can be written as
+
+$$
+\cos\left(\frac{\psi - \psi_0}{K}\right) = \frac{1}{C}\left(u - u_0\right) \equiv A, \quad |A| \leq 1.
+$$
+
+Solutions are
+
+$$
+\psi = \psi_0 + K(\pm \arccos A + 2\pi n), \qquad n \in \mathbb{Z}. \tag{4.8.3}
+$$
+
+The key point here is that $\psi$ is an angle coordinate, so physically $\psi$ is only defined module $2\pi$, we then only care about solutions of Eqn. (4.8.3) mod $2\pi$. More explictly, call $\alpha = \arccos A \in [0, \pi]$, then question befomrs, how many distinct values are in the set
+
+$$
+S = \{ (\psi_0 + K(\pm \alpha + 2\pi n)) \pmod{2\pi} : n \in \mathbb{Z} \}.
+$$
+
+There are two branches here, $\psi^{\pm}_n = \psi_0 \pm K\alpha + 2\pi k n$, for each branch, increasing $n$ just adds the increment $2\pi K$, so the question above can be rephrased as: "On the circle $\pmod{2\pi}$, how many distinct points do we get by repeatedly adding $2\pi K$ to the initial point $\psi_0 \pm \alpha$?".
+
+If $K \in \mathbb{Z}$, then $2\pi K n \pmod{2\pi} = 0$ for all $n$, and the entire family collapses to $\psi = \psi_0 \pm K \alpha \pmod{2\pi}$, that is, at most two distinct solutions physically this corresponds to the particle moving in, and moving out.
+
+If, $K  = p/q\in \mathbb{Q}$, the are at most $2q$ distinct points.
+
+Finally, if $K$ is irrational, the set is infinite. In summary we have
+
+$$
+|S| = \left\{
+\begin{array}{ll}
+\leq 2 & K \in \mathbb{Z} \\
+\leq 2q & K = p/q \in \mathbb{Q} \\
+\infty & K \not\in \mathbb{Q}
+\end{array}
+\right.
+$$
+
+So the condition "$(E, L, r, \psi_0)$ restricts $\psi$ to a finite set" forces $K \in \mathbb{Z}$.
+
+### Part d
+
+Inevetably we will only have two values of $\psi$ that satisfy the condition, but for $K = 1$ the radial period equal $2\pi$ and the orbit closes after on radial oscillation
+
+$$
+\frac{1}{K^2} = 1 = 1 - \frac{2aGM}{L^2} \quad \Rightarrow \quad a = 0,
+$$
+
+So we recover the Kepler potential.
+
+<!-- ======================= -->
 <!-- PROBLEM 4.10            -->
 <!-- ======================= -->
 ## Problem 4.10 🌶️
