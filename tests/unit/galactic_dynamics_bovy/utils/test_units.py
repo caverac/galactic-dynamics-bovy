@@ -5,13 +5,44 @@ from astropy import constants, units as u
 import numpy as np
 import pytest
 
-from galactic_dynamics_bovy.utils.units import GalacticUnits, StellarUnits
+from galactic_dynamics_bovy.utils.units import GalacticUnits, SolarUnits, StellarUnits
 
 # ── Reference values from astropy (used for cross-checks) ────────────────────
 
 _G = constants.G
 _c = constants.c
 _M10 = 1e10 * u.Msun
+
+
+class TestSolarUnits:
+    """Tests for SolarUnits class constants (GM, c, AU)."""
+
+    def test_GM_is_positive(self) -> None:
+        """Gravitational parameter must be positive."""
+        assert SolarUnits.GM > 0
+
+    def test_GM_matches_astropy(self) -> None:
+        """GM should match astropy GM_sun in m^3/s^2."""
+        expected = float((_G * u.Msun).to(u.m**3 / u.s**2, equivalencies=[]).value)
+        assert np.isclose(SolarUnits.GM, expected, rtol=1e-10)
+
+    def test_c_matches_astropy(self) -> None:
+        """Speed of light should match astropy in m/s."""
+        expected = float(_c.to(u.m / u.s).value)
+        assert SolarUnits.c == expected
+
+    def test_c_order_of_magnitude(self) -> None:
+        """Speed of light in m/s should be ~3e8."""
+        assert 2.99e8 < SolarUnits.c < 3.01e8
+
+    def test_AU_matches_astropy(self) -> None:
+        """AU should match astropy value in metres."""
+        expected = float(constants.au.to(u.m).value)
+        assert SolarUnits.AU == expected
+
+    def test_AU_order_of_magnitude(self) -> None:
+        """AU in metres should be ~1.496e11."""
+        assert 1.49e11 < SolarUnits.AU < 1.50e11
 
 
 class TestStellarUnitsClassConstants:

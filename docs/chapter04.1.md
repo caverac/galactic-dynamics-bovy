@@ -495,6 +495,105 @@ $$
 So we recover the Kepler potential.
 
 <!-- ======================= -->
+<!-- PROBLEM 4.9             -->
+<!-- ======================= -->
+## Problem 4.9
+
+The precession is just $\Delta\varpi = \Delta\psi - 2\pi$, where $\Delta\psi$ is the change in azimuthal angle after one radial period
+
+$$
+\Delta\psi = 2\int_{r_p}^{r_a} \frac{L}{r^2} \frac{dr}{\sqrt{2(E - \Phi_{\mathrm{eff}}(r; L))}}.
+$$
+
+### Numerical integration
+
+To ensure the integral converges at the turning points, we can change variables to $2r = (r_p + r_a) + (r_a - r_p)\sin t$
+
+$$
+\Delta\psi = \int_{-\pi/2}^{\pi/2} dt\, \frac{L(r_a - r_p)}{r^2(t)}\frac{\cos t}{\sqrt{2(E - \Phi_{\mathrm{eff}}(r(t); L))}},
+$$
+
+![Orbit Precession](assets/generated/p04_09_gr_precession.png)
+
+```python
+>>> from galactic_dynamics_bovy.chapter04.gr_precession import plot_gr_precession
+>>> plot_gr_precession()
+```
+
+Each (thick) lines corresponds to different value of eccentricity, more specifically for Mercury
+
+```python
+>>> from galactic_dynamics_bovy.chapter04.gr_precession import compute_delta_psi, SolarUnits
+>>> e_mercury, a_mercury = 0.205630, 0.387098 * SolarUnits.AU
+>>> precession_rad_mercury = compute_delta_psi(a_mercury * (1 - e_mercury), e_mercury) - 2.0 * np.pi
+>>> precession_arcsec_mercury = np.degrees(precession_rad_mercury) * 3600.0
+>>> orbits_per_century = 100.0 * 365.25 / 87.969
+>>> precession_arcsec_mercury * orbits_per_century
+42.9808767790197
+```
+
+### Analytical approximation
+Define $\mu = GM$ and $p = L^2/\mu$, then for
+
+$$
+\Phi(r; L) = -\frac{\mu}{r} - \frac{\mu L^2}{c^2 r^3},
+$$
+
+the force is
+
+$$
+F(r) = -\frac{d\Phi}{dr} = -\frac{\mu}{r^2} - \frac{3\mu L^2}{c^2 r^4},
+$$
+
+and the equation of motion of a particle in this potential is the solution to
+
+$$
+u'' + u = -\frac{F(1/u)}{L^2 u^2} = \frac{1}{p} + 3\frac{\mu}{c^2}u^2. \tag{4.9.1}
+$$
+
+The solution Kepler's equation $u_0$ is
+
+$$
+u_0(\psi) = \frac{1}{p}(1 + e\cos\psi).
+$$
+
+Assume the solution to Eqn. (4.9.1) is of the form $u = u_0 + \delta u$, then to leading order
+
+$$
+(u_0 + \delta u)'' + (u_0 + \delta u) = \frac{\mu}{L^2} + \frac{3\mu}{c^2}(u_0 + \delta u)^2 \approx \frac{\mu}{L^2} + \frac{3\mu}{c^2}u_0^2.
+$$
+
+Since $u_0$ is a solution to the Kepler problem, $u_0'' + u_0 = \mu/L^2$, so
+
+$$
+\delta u'' + \delta u = \frac{3\mu}{c^2}u_0^2 = \frac{3\mu}{c^2 p^2}\left(1 + \frac{e^2}{2} + 2e\cos\psi + \frac{e^2}{2}\cos 2\psi\right).
+$$
+
+This is the key observation: the perturbing force contains a term proportional to $\cos\psi$, which is resonant with the homogeneous solution of the left-hand side, so we expect a secular growth in $\delta u$: $\delta u \sim e\kappa\psi \sin\psi$ for some constant $\kappa$, that is
+
+$$
+u(\psi) \approx \frac{1}{p}(1 + e\cos\psi + e\kappa\psi \sin\psi) \approx \frac{1}{p}(1 + e\cos(\psi(1 - \kappa))). \tag{4.9.2}
+$$
+
+Substituting this ansatz back into Eqn. (4.9.1) we get
+
+$$
+\begin{align}
+u'' + u &= \left[1 - \frac{e(1 - \kappa)^2}{p} \right]\cos(\psi(1 - \kappa)) + \frac{1}{p} \\
+&= \frac{1}{p} + \frac{2\kappa e}{p}\cos(\psi(1 - \kappa)) + O(\kappa^2) \\
+&\stackrel{(4.9.1)}{=} \frac{1}{p} + \frac{3\mu}{c^2 p^2}\left(1 + \frac{e^2}{2} + 2e\cos(\psi(1 - \kappa)) + \frac{e^2}{2}\cos 2\psi\right).
+\end{align}
+$$
+
+Matching coefficients
+
+$$
+\frac{\kappa}{p} = \frac{3\mu}{c^2 p^2} \quad \Rightarrow \quad \kappa = \frac{3\mu}{c^2 p} = \frac{3GM}{c^2 a(1-e^2)}.
+$$
+
+Dashed lines in the plot above show the analytical approximation $\Delta\varpi \approx 2\pi\kappa$ derived from Eqn. (4.9.2), which works well for small eccentricity and small precession.
+
+<!-- ======================= -->
 <!-- PROBLEM 4.10            -->
 <!-- ======================= -->
 ## Problem 4.10 🌶️

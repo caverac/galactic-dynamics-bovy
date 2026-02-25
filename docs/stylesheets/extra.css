@@ -48,6 +48,11 @@
   background-color: #21262d;
 }
 
+/* Mermaid diagrams */
+[data-md-color-scheme="slate"] .mermaid {
+  background-color: transparent !important;
+}
+
 /* Footer */
 .md-footer {
   background-color: #0d1117;

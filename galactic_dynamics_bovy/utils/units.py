@@ -25,6 +25,33 @@ _c_const = constants.c
 _M10 = 1e10 * u.Msun
 
 
+class SolarUnits:
+    """Physical constants in SI units for solar-system dynamics (m, s, kg).
+
+    All values are bare floats in the SI unit system.
+
+    Attributes
+    ----------
+    GM : float
+        Solar gravitational parameter GM_sun in m^3 / s^2.
+    c : float
+        Speed of light in m / s.
+    AU : float
+        Astronomical unit in m.
+
+    Examples
+    --------
+    >>> SolarUnits.GM  # doctest: +SKIP
+    1.3271244...e+20
+    >>> SolarUnits.AU  # doctest: +SKIP
+    1.49597870...e+11
+    """
+
+    GM: ClassVar[float] = float((_G_const * u.Msun).to(u.m**3 / u.s**2, equivalencies=[]).value)
+    c: ClassVar[float] = float(_c_const.to(u.m / u.s).value)
+    AU: ClassVar[float] = float(constants.au.to(u.m).value)
+
+
 class StellarUnits:
     """Physical constants in stellar units (pc, Msun, Myr, km/s).
 

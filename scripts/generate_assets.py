@@ -7,9 +7,11 @@ This script discovers all registered plot functions and generates their
 corresponding figure assets for the documentation.
 
 Usage:
-    uv run python scripts/generate_assets.py
+    uv run python scripts/generate_assets.py              # generate all
+    uv run python scripts/generate_assets.py p04_09 p02   # only matching names
 """
 
+import argparse
 from pathlib import Path
 import re
 
@@ -25,6 +27,7 @@ import galactic_dynamics_bovy.chapter02.spherical_exponential
 import galactic_dynamics_bovy.chapter02.vcirc_profiles
 import galactic_dynamics_bovy.chapter03.planet_comet_scattering
 import galactic_dynamics_bovy.chapter04.adiabatic_isochrone
+import galactic_dynamics_bovy.chapter04.gr_precession
 from galactic_dynamics_bovy.utils.assets import get_registered_assets
 
 ASSETS_DIR = Path(__file__).parent.parent / "docs" / "assets" / "generated"
@@ -40,15 +43,39 @@ def _chapter_sort_key(item: tuple[str, tuple]) -> tuple[int, str]:
     return (chapter_num, output_name)
 
 
+def _parse_args() -> argparse.Namespace:
+    """Parse command-line arguments."""
+    parser = argparse.ArgumentParser(description="Generate documentation plot assets.")
+    parser.add_argument(
+        "filters",
+        nargs="*",
+        metavar="PATTERN",
+        help="Only generate assets whose filename contains one of these substrings. "
+        "If omitted, all assets are generated.",
+    )
+    return parser.parse_args()
+
+
+def _matches_any(name: str, filters: list[str]) -> bool:
+    """Return True if *name* contains any of the filter substrings."""
+    return any(f in name for f in filters)
+
+
 def main() -> None:
-    """Generate all documentation assets."""
+    """Generate documentation assets, optionally filtered by name."""
+    args = _parse_args()
     console = Console()
 
     ASSETS_DIR.mkdir(parents=True, exist_ok=True)
     console.print(f"Assets directory: {ASSETS_DIR}")
 
     assets = get_registered_assets()
-    console.print(f"Found {len(assets)} registered assets\n")
+
+    if args.filters:
+        assets = {k: v for k, v in assets.items() if _matches_any(k, args.filters)}
+        console.print(f"Filter: {', '.join(args.filters)} -> {len(assets)} matching assets\n")
+    else:
+        console.print(f"Found {len(assets)} registered assets\n")
 
     written = 0
     skipped = 0
