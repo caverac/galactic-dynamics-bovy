@@ -5,8 +5,7 @@ the full first post-Newtonian (1PN) equation of motion in Cartesian 2D,
 then compares with the effective-potential quadrature approach from
 Problem 4.9 and the analytical approximation.
 
-Parameters:
-    M_bullet = 4.25e6 Msun, e = 0.884649, a = 1031.31 AU
+S2 orbital elements: M_bullet = 4.25e6 Msun, e = 0.884649, a = 1031.31 AU.
 """
 
 from dataclasses import dataclass

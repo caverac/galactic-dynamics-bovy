@@ -5,7 +5,8 @@ This script maps source files to their corresponding test files and runs
 only the affected tests. Used by pre-commit to avoid running the full
 test suite on every commit.
 
-Examples:
+Mapping example::
+
     galactic_dynamics_bovy/chapter02/ic_2574.py
         -> tests/unit/galactic_dynamics_bovy/chapter02/test_ic_2574.py
 
