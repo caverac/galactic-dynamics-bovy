@@ -28,6 +28,7 @@ import galactic_dynamics_bovy.chapter02.vcirc_profiles
 import galactic_dynamics_bovy.chapter03.planet_comet_scattering
 import galactic_dynamics_bovy.chapter04.adiabatic_isochrone
 import galactic_dynamics_bovy.chapter04.gr_precession
+import galactic_dynamics_bovy.chapter04.gr_precession_s2
 from galactic_dynamics_bovy.utils.assets import get_registered_assets
 
 ASSETS_DIR = Path(__file__).parent.parent / "docs" / "assets" / "generated"
