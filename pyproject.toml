@@ -82,6 +82,7 @@ testpaths = ["tests"]
 addopts = "--doctest-modules --cov=galactic_dynamics_bovy --cov-report=term-missing --cov-fail-under=100"
 filterwarnings = [
     "ignore:Using C implementation to integrate orbits:galpy.util.galpyWarningVerbose",
+    "ignore:libgalpy_actionAngleTorus C extension module not loaded:galpy.util.galpyWarningVerbose",
 ]
 
 [tool.pylint.format]

@@ -154,6 +154,20 @@ class TestComputePrecession1pn:
         prec_arcmin = np.degrees(prec) * 60.0
         assert 5.0 < prec_arcmin < 20.0
 
+    @patch("galactic_dynamics_bovy.chapter04.gr_precession_s2.integrate_orbit_1pn")
+    def test_negative_angle_wrapped(self, mock_integrate: MagicMock) -> None:
+        """When arctan2 returns a negative angle, it should be wrapped to [0, 2*pi)."""
+        T_kepler = 2.0 * np.pi * np.sqrt(A_S2**3 / GM_BH)
+        mock_sol = MagicMock()
+        mock_sol.t_events = [np.array([0.01 * T_kepler, 0.8 * T_kepler])]
+        # Pericenter at negative y => arctan2 returns negative angle
+        mock_sol.sol.return_value = np.array([1e13, -1e11, 0.0, 1e4])
+        mock_integrate.return_value = mock_sol
+
+        prec = compute_precession_1pn()
+        assert prec > 0
+        assert prec < 2.0 * np.pi
+
 
 class TestPlot:
     """Tests for plot_gr_precession_s2."""
