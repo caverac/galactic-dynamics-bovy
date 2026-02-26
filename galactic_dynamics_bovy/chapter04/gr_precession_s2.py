@@ -297,11 +297,11 @@ if __name__ == "__main__":  # pragma: no cover
     prec_analytical_arcmin = np.degrees(prec_analytical) * 60.0
 
     console.print("[green]Three-way comparison of GR precession per orbit:[/green]\n")
+    console.print(f"  Effective potential:     {prec_quad_arcmin:10.4f} arcmin  (exact Schwarzschild)")
     console.print(f"  1PN integration:        {prec_1pn_arcmin:10.4f} arcmin")
-    console.print(f"  Effective potential:     {prec_quad_arcmin:10.4f} arcmin")
     console.print(f"  Analytical (1st order):  {prec_analytical_arcmin:10.4f} arcmin")
     console.print()
-    console.print(f"  1PN vs analytical:      {abs(prec_1pn - prec_analytical) / prec_analytical * 100:.4f}%")
-    console.print(f"  Quadrature vs analytical: {abs(prec_quad - prec_analytical) / prec_analytical * 100:.4f}%")
+    console.print(f"  1PN vs eff. potential:        {abs(prec_1pn - prec_quad) / prec_quad * 100:.4f}%")
+    console.print(f"  Analytical vs eff. potential: {abs(prec_analytical - prec_quad) / prec_quad * 100:.4f}%")
 
     plot_gr_precession_s2()
