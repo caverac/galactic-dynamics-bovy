@@ -54,7 +54,7 @@ $$
 \log c = 0.905 - 0.101\log\left(\frac{M_{200}}{10^{12}h^{-1}M_\odot}\right).
 $$
 
-Solving Eqn. (3.2.2) for $c$ we get (note that $R_{200}$ also depends on $M_{200}$ and therefore on $c$)
+Solving Eq. (3.2.2) for $c$ we get (note that $R_{200}$ also depends on $M_{200}$ and therefore on $c$)
 
 ```python
 >>> from galactic_dynamics_bovy.chapter03.nfw_concentration import solve_concentration

@@ -402,7 +402,7 @@ L^2\left(\frac{du}{d\psi}\right)^2 &= 2E + 2GMu - (L^2 - 2aGM)u^2 \\
 \end{align}
 $$
 
-Using Eqn. (4.8.2) to substitute for $u$ and $du/d\psi$
+Using Eq. (4.8.2) to substitute for $u$ and $du/d\psi$
 
 $$
 \begin{align}
@@ -422,7 +422,7 @@ $$
 
 An integral of motion is any quantity $I(\mathbf{x}, \mathbf{v})$ that (i) depends only on the current phase-space coordinates and (ii) is conserved along the orbit. $\psi_0$ satisfies both conditions:
 
-From Eqn. (4.8.2) and its derivative with respect to $\psi$,
+From Eq. (4.8.2) and its derivative with respect to $\psi$,
 
 $$
 u - \frac{GMK^2}{L^2} = C\cos\left(\frac{\psi - \psi_0}{K}\right), \qquad \frac{du}{d\psi} = -\frac{C}{K}\sin\left(\frac{\psi - \psi_0}{K}\right),
@@ -446,7 +446,7 @@ This is analogous to the Laplace–Runge–Lenz vector in the Kepler problem: wh
 
 ### Part c
 
-For simplicity call $u_0 = GMK^2/L^2$, Eqn. (4.8.2) can be written as
+For simplicity call $u_0 = GMK^2/L^2$, Eq. (4.8.2) can be written as
 
 $$
 \cos\left(\frac{\psi - \psi_0}{K}\right) = \frac{1}{C}\left(u - u_0\right) \equiv A, \quad |A| \leq 1.
@@ -458,7 +458,7 @@ $$
 \psi = \psi_0 + K(\pm \arccos A + 2\pi n), \qquad n \in \mathbb{Z}. \tag{4.8.3}
 $$
 
-The key point here is that $\psi$ is an angle coordinate, so physically $\psi$ is only defined module $2\pi$, we then only care about solutions of Eqn. (4.8.3) mod $2\pi$. More explictly, call $\alpha = \arccos A \in [0, \pi]$, then question befomrs, how many distinct values are in the set
+The key point here is that $\psi$ is an angle coordinate, so physically $\psi$ is only defined module $2\pi$, we then only care about solutions of Eq. (4.8.3) mod $2\pi$. More explictly, call $\alpha = \arccos A \in [0, \pi]$, then question befomrs, how many distinct values are in the set
 
 $$
 S = \{ (\psi_0 + K(\pm \alpha + 2\pi n)) \pmod{2\pi} : n \in \mathbb{Z} \}.
@@ -557,7 +557,7 @@ $$
 u_0(\psi) = \frac{1}{p}(1 + e\cos\psi).
 $$
 
-Assume the solution to Eqn. (4.9.1) is of the form $u = u_0 + \delta u$, then to leading order
+Assume the solution to Eq. (4.9.1) is of the form $u = u_0 + \delta u$, then to leading order
 
 $$
 (u_0 + \delta u)'' + (u_0 + \delta u) = \frac{\mu}{L^2} + \frac{3\mu}{c^2}(u_0 + \delta u)^2 \approx \frac{\mu}{L^2} + \frac{3\mu}{c^2}u_0^2.
@@ -575,7 +575,7 @@ $$
 u(\psi) \approx \frac{1}{p}(1 + e\cos\psi + e\kappa\psi \sin\psi) \approx \frac{1}{p}(1 + e\cos(\psi(1 - \kappa))). \tag{4.9.2}
 $$
 
-Substituting this ansatz back into Eqn. (4.9.1) we get
+Substituting this ansatz back into Eq. (4.9.1) we get
 
 $$
 \begin{align}
@@ -591,7 +591,7 @@ $$
 \frac{\kappa}{p} = \frac{3\mu}{c^2 p^2} \quad \Rightarrow \quad \kappa = \frac{3\mu}{c^2 p} = \frac{3GM}{c^2 a(1-e^2)}.
 $$
 
-Dashed lines in the plot above show the analytical approximation $\Delta\varpi \approx 2\pi\kappa$ derived from Eqn. (4.9.2), which works well for small eccentricity and small precession.
+Dashed lines in the plot above show the analytical approximation $\Delta\varpi \approx 2\pi\kappa$ derived from Eq. (4.9.2), which works well for small eccentricity and small precession.
 
 <!-- ======================= -->
 <!-- PROBLEM 4.10            -->

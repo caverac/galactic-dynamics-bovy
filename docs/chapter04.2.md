@@ -38,7 +38,7 @@ where $(x_p, y_p)$ is the position at the next pericenter.
 | Method | $\Delta\varpi$ (arcmin) | vs eff. potential |
 |---|---|---|
 | Effective potential quadrature ([Problem 4.9](chapter04.1.md#problem-49)) | 12.135 | — |
-| 1PN integration (Eqn. 4.11.1) | 12.105 | $-0.25\%$ |
+| 1PN integration (Eq. 4.11.1) | 12.105 | $-0.25\%$ |
 | Analytical $6\pi GM_\bullet / [c^2 a(1-e^2)]$ | 12.125 | $-0.09\%$ |
 
 All three values are consistent with the $\sim 12'$ per orbit measured by the GRAVITY interferometer.
@@ -53,7 +53,7 @@ $$
 
 is conservative and velocity-independent: it can be derived from a scalar potential.
 
-The 1PN equation of motion (Eqn. 4.11.1) comes from a different starting point: it is the test-particle limit of the Einstein-Infeld-Hoffmann (EIH) $N$-body equations [@einstein1938], a weak-field slow-motion expansion ($GM/(c^2 r) \ll 1$, $v/c \ll 1$) of the general-relativistic equations of motion. [@will2008] applies this framework to stellar orbits around Sgr A\*. The EIH formalism is designed for the general $N$-body problem where no exact metric solution is available; Eqn. (4.11.1) is the one-body reduction. The acceleration depends on both position and velocity; in particular the $v_r \mathbf{v}$ term cannot be derived from a scalar potential, reflecting the fact that in GR the gravitational field couples to kinetic energy (mass-energy equivalence).
+The 1PN equation of motion (Eq. 4.11.1) comes from a different starting point: it is the test-particle limit of the Einstein-Infeld-Hoffmann (EIH) $N$-body equations [@einstein1938], a weak-field slow-motion expansion ($GM/(c^2 r) \ll 1$, $v/c \ll 1$) of the general-relativistic equations of motion. [@will2008] applies this framework to stellar orbits around Sgr A\*. The EIH formalism is designed for the general $N$-body problem where no exact metric solution is available; Eq. (4.11.1) is the one-body reduction. The acceleration depends on both position and velocity; in particular the $v_r \mathbf{v}$ term cannot be derived from a scalar potential, reflecting the fact that in GR the gravitational field couples to kinetic energy (mass-energy equivalence).
 
 Both approaches agree at leading order, but because the effective potential captures the exact one-body Schwarzschild result while the 1PN EOM truncates at first order in $GM/(c^2 r)$, the effective-potential quadrature implicitly includes the 2PN and all higher-order corrections that the 1PN integration drops. This is why it gives a slightly larger precession (12.135 vs 12.105 arcmin, a ~0.25% difference). For orbits closer to the black hole the gap would grow.
 
