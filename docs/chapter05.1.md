@@ -206,6 +206,194 @@ $$
 This is less than the age of the universe, so $100\,M_\odot$ primordial black holes could plausibly destroy the Eridanus II star cluster through two-body encounters. For comparison, without dark matter the cluster would have $t_{\mathrm{relax}} \approx 200\,\mathrm{Gyr}$, safely collisionless.
 
 <!-- ======================= -->
+<!-- PROBLEM 5.5             -->
+<!-- ======================= -->
+## Problem 5.5
+
+### Part a
+
+In a razor-thin disk of radius $R$ with $N$ stars, the surface number density is $\Sigma_n = N/(\pi R^2)$. A star traversing the disk sweeps a strip of length $\sim 2R$ and width $2\,db$ (both sides) at impact parameter $b$:
+
+$$
+dN_{\mathrm{enc}} = \Sigma_n \times 2\,db \times 2R = \frac{4N}{\pi R}\,db.
+$$
+
+This is the key contrast with 3D, where the annular geometry gives $dN_{\mathrm{enc}} \propto b\,db$. The mean-squared velocity change per crossing is
+
+$$
+\begin{align}
+\langle \Delta v^2 \rangle &= \int_{b_{\min}}^{R} dN_{\mathrm{enc}}\, (\delta v)^2 \\
+&= \frac{16\,G^2 m^2 N}{\pi R\,v^2} \int_{b_{\min}}^{R} \frac{db}{b^2} \\
+&= \frac{16\,G^2 m^2 N}{\pi R\,v^2} \left(\frac{1}{b_{\min}} - \frac{1}{R}\right) \\
+&\approx \frac{16\,G^2 m^2 N}{\pi R\,v^2} \times \frac{1}{b_{\min}} \\
+&= \frac{16\,G^2 m^2 N}{\pi R\,v^2} \times \frac{v^2}{2Gm} \\
+&= \frac{8\,GmN}{\pi R}
+\end{align}
+$$
+
+The number of crossings to relax is
+
+$$
+n_{\mathrm{cross}} = \frac{v^2}{\langle \Delta v^2 \rangle} = \frac{\pi\,R\,v^2}{8\,GmN}
+$$
+
+Applying the virial theorem $v^2 \sim GNm/R$:
+
+$$
+\frac{t_{\mathrm{relax}}}{t_{\mathrm{dyn}}} \sim \frac{\pi}{8} \sim \mathcal{O}(1)
+$$
+
+### Part b
+
+The difference is purely geometric, in how encounters at impact parameter $b$ are counted:
+
+- **3D (sphere):** encounters live in a cylindrical shell of area $2\pi b\,db$, so $dN_{\mathrm{enc}} \propto b\,db$. The factor of $b$ partially cancels the $1/b^2$ from $(\delta v)^2$, giving $\int db/b = \ln\Lambda$, all scales contribute roughly equally (logarithmically). Distant encounters collectively matter as much as close ones, and relaxation requires $\sim N/\ln N$ crossings.
+
+- **2D (disk):** encounters live in a strip of width $2\,db$ with no extra factor of $b$, so $dN_{\mathrm{enc}} \propto db$. The integral becomes $\int db/b^2$, completely dominated by the closest encounters. Close encounters are so efficient that a single crossing already deflects a star by $\sim v$, making $t_{\mathrm{relax}} \sim t_{\mathrm{dyn}}$ regardless of $N$.
+
+!!! warning "Incomplete"
+
+    Parts c, d and e are missing.
+
+
+<!-- ======================= -->
+<!-- PROBLEM 5.6             -->
+<!-- ======================= -->
+## Problem 5.6
+
+
+### Velocity dispersion
+Start from the spherical Jeans equation for an isotropic system ($\beta = 0$):
+
+$$
+\frac{d(\nu\,\sigma^2)}{dr} = -\nu\,\frac{d\Phi}{dr}
+$$
+
+Integrate from $r$ to $\infty$, using the boundary condition $\nu\,\sigma^2 \to 0$ as $r \to \infty$:
+
+$$
+\nu(r)\,\sigma^2(r) = \int_r^\infty dr'\, \nu(r')\,\frac{d\Phi}{dr'}
+$$
+
+Now change the integration variable from $r'$ to $\Phi'$. In a spherical system $\Phi(r)$ is monotonic, so the substitution is one-to-one. The limits transform as $r' = r \Rightarrow \Phi' = \Phi(r)$ and $r' \to \infty \Rightarrow \Phi' \to 0$, giving
+
+$$
+\nu(r)\,\sigma^2(r) = \int_{\Phi(r)}^{0} d\Phi'\,\nu(\Phi')
+$$
+
+### Hernquist profile
+
+The Hernquist profile has density and potential
+
+$$
+\rho(r) = \frac{M\,a}{2\pi\,r\,(r+a)^3}, \qquad
+\Phi(r) = -\frac{GM}{r+a}
+$$
+
+Define $s = r/a$ and $q = -a\,\Phi/GM = 1/(1+s)$, inverting $s = (1-q)/q$, $1+s = 1/q$, so
+
+$$
+\rho(q) = \frac{M}{2\pi\,a^3}\,\frac{q^4}{1-q}
+$$
+
+Since $\Phi = -(GM/a)\,q$, we have $d\Phi = -(GM/a)\,dq$. The limits $\Phi(r) \to 0$ become $q_0 \to 0$ with $q_0 = 1/(1+s)$, so
+
+$$
+\begin{align}
+\rho\,\sigma^2 &= \int_{\Phi(r)}^{0} \rho(\Phi')\,d\Phi'
+= \frac{GM^2}{2\pi\,a^4}\int_0^{q_0}\frac{q^4}{1-q}\,dq \\
+&= \frac{GM^2}{2\pi\,a^4}\int_0^{q_0}\left(-1 - q - q^2 - q^3 + \frac{1}{1-q}\right) dq
+\end{align}
+$$
+
+So that
+
+$$
+\sigma^2(s) = \frac{GM}{a}\,s(1+s)^3\left[
+\ln\!\left(\frac{1+s}{s}\right)
+- \frac{1}{1+s}
+- \frac{1}{2(1+s)^2}
+- \frac{1}{3(1+s)^3}
+- \frac{1}{4(1+s)^4}
+\right]
+$$
+
+<!-- ======================= -->
+<!-- PROBLEM 5.7             -->
+<!-- ======================= -->
+## Problem 5.7 🌶️
+
+Write $f(\mathcal{E}, L) = L^{-2\beta}\,g(\mathcal{E})$ where
+
+$$
+g(\mathcal{E}) \propto \tilde{\mathcal{E}}^{\,5/2-\beta}\; {}_2F_1\!\bigl(5-2\beta,\; 1-2\beta;\; 7/2-\beta;\; \tilde{\mathcal{E}}\bigr).
+$$
+
+The velocity distribution at radius $r$ is
+
+$$
+\begin{align}
+p(v \mid r) &\propto v^2 \int d\Omega_v\, f(\mathcal{E}, L) \\
+&= v^2 g(\mathcal{E}) (rv)^{-2\beta} \int d\Omega_v\, (\sin\theta)^{-2\beta} \\
+&\propto v^{2-2\beta}\; g(\mathcal{E})
+\end{align}
+$$
+
+**Concentration on circular orbits.** The tangential-orbit limit corresponds to $\beta \to -\infty$. In this regime, $f(\mathcal{E}, L) \propto L^{2|\beta|}\, g(\mathcal{E})$. Introduce the circularity
+
+$$
+\eta \equiv \frac{L}{L_c(\mathcal{E})},
+$$
+
+where $L_c(\mathcal{E})$ is the angular momentum of the circular orbit at energy $\mathcal{E}$. By definition $0 \le \eta \le 1$,  with equality $\eta = 1$ only for circular orbits. Thus,
+
+$$
+f(\mathcal{E}, L) \propto \eta^{2|\beta|}\, L_c(\mathcal{E})^{2|\beta|}\, g(\mathcal{E}).
+$$
+
+At fixed radius $r$ and speed $v$, the angular momentum is
+
+$$
+L = r v \sin\theta,
+$$
+
+so
+
+$$
+\eta = \frac{r v \sin\theta}{L_c(\mathcal{E})} \le \frac{r v}{L_c(\mathcal{E})} \equiv Q_r(v) \le 1.
+$$
+
+The upper bound $Q_r(v)=1$ is reached only when:
+
+- the velocity is purely tangential ($\sin\theta = 1$),
+- and $v = v_c(r)$ is the circular speed at radius $r$.
+
+After integrating over velocity directions, the speed distribution behaves as
+
+$$
+p(v \mid r) \propto \left[Q_r(v)\right]^{2|\beta|}
+$$
+
+Since:
+
+- $Q_r(v) < 1$ for all $v \ne v_c(r)$,
+- $Q_r(v) = 1$ only at $v = v_c(r)$,
+
+it follows that
+
+$$
+\left[Q_r(v)\right]^{2|\beta|} \to 0 \quad \text{for } v \ne v_c(r),
+$$
+
+as $|\beta| \to \infty$.
+
+Therefore, the speed distribution collapses to a delta function:
+
+$$
+p(v \mid r) \xrightarrow[\beta \to -\infty]{} \delta\!\bigl(v - v_c(r)\bigr).
+$$
+
+<!-- ======================= -->
 <!-- REFERENCES              -->
 <!-- ======================= -->
 ## References
