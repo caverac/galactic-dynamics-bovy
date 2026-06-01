@@ -504,6 +504,58 @@ Evaluating the central velocity distribution of `galpy.df.kingdf` for increasing
 ![Central excess kurtosis of a King model rising to zero as $W_0 \to \infty$](assets/generated/p05_09_king_maxwellian_convergence.png)
 
 <!-- ======================= -->
+<!-- PROBLEM 5.10            -->
+<!-- ======================= -->
+## Problem 5.10
+From
+
+$$
+\frac{d\bigl(\nu\,\overline{v_r^2}\bigr)}{dr}
++ \frac{\nu}{r}\Bigl[\,2\,\overline{v_r^2} - \overline{v_\theta^2} - \overline{v_\phi^2}\,\Bigr]
+= -\nu\,\frac{d\Phi}{dr}.
+$$
+
+Split the moments into random (dispersion) and streaming parts. With no streaming in $r$ or $\theta$, $\overline{v_r^2} = \sigma_r^2$ and $\overline{v_\theta^2} = \sigma_\theta^2$; the mean azimuthal motion $\overline{v}_\phi = v$ contributes
+
+$$
+\overline{v_\phi^2} = \sigma_\phi^2 + v^2.
+$$
+
+For a spherical system the random tangential motion is symmetric, $\sigma_\theta^2 = \sigma_\phi^2$, so the anisotropy is
+
+$$
+\beta = 1 - \frac{\sigma_\theta^2 + \sigma_\phi^2}{2\,\sigma_r^2}
+\quad\Longrightarrow\quad
+\sigma_\theta^2 + \sigma_\phi^2 = 2(1-\beta)\,\sigma_r^2.
+$$
+
+The bracket can be rewritten as
+
+$$
+2\,\overline{v_r^2} - \overline{v_\theta^2} - \overline{v_\phi^2}
+= 2\sigma_r^2 - 2(1-\beta)\sigma_r^2 - v^2
+= 2\beta\,\sigma_r^2 - v^2.
+$$
+
+Writing $v^2 = (v/\sigma_r)^2\,\sigma_r^2$ pulls out a common factor of $\sigma_r^2$,
+
+$$
+2\beta\,\sigma_r^2 - v^2
+= 2\sigma_r^2\left[\beta - \frac{1}{2}\left(\frac{v}{\sigma_r}\right)^2\right]
+\equiv 2\,\beta_{\mathrm{eff}}\,\sigma_r^2,
+$$
+
+so the Jeans equation takes exactly the non-rotating, anisotropy form (5.47),
+
+$$
+\frac{d\bigl(\nu\,\sigma_r^2\bigr)}{dr}
++ \frac{2\,\beta_{\mathrm{eff}}}{r}\,\nu\,\sigma_r^2
+= -\nu\,\frac{d\Phi}{dr},
+\qquad
+\beta_{\mathrm{eff}} = \beta - \frac{1}{2}\left(\frac{v}{\sigma_r}\right)^2.
+$$
+
+<!-- ======================= -->
 <!-- REFERENCES              -->
 <!-- ======================= -->
 ## References
