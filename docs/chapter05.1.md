@@ -439,6 +439,71 @@ $$
 - $\beta_0 = 0$: recovers the standard Osipkov-Merritt profile $\beta = r^2/(r^2 + r_a^2)$.
 
 <!-- ======================= -->
+<!-- PROBLEM 5.9             -->
+<!-- ======================= -->
+## Problem 5.9
+
+An isotropic system in equilibrium has a DF that depends only on energy, $f = f(\mathcal{E})$, with $\mathcal{E} = \Psi(\mathbf{x}) - v^2/2$ and  $\Psi = -\Phi + \Phi_0$. At a point where the potential is $\Psi$, the local velocity distribution is
+
+$$
+p(\mathbf{v} \mid \Psi) = \frac{f(\Psi - v^2/2)}{n(\Psi)}, \qquad
+n(\Psi) = \int d^3\mathbf{v}\, f(\Psi - v^2/2).
+$$
+
+**Energy variables.** Substitute $\mathcal{E} = \Psi - v^2/2$ (so $v\,dv = -d\mathcal{E}$, $v = \sqrt{2(\Psi - \mathcal{E})}$) in the angular-integrated moments. With $h_p(\Psi) \equiv \int_0^\infty dx\, x^p\, f(\Psi - x) = \int_{-\infty}^\Psi d\mathcal{E}\,(\Psi - \mathcal{E})^p f(\mathcal{E})$,
+
+$$
+n(\Psi) = 4\pi\sqrt{2}\; h_{1/2}(\Psi), \qquad
+\int d^3\mathbf{v}\, v^2 f = 4\pi\, 2^{3/2}\, h_{3/2}(\Psi).
+$$
+
+**Constant-dispersion condition.** Since $\langle v^2\rangle = 3\sigma^2$ at every point,
+
+$$
+\int d^3\mathbf{v}\, v^2 f = 3\sigma^2\, n(\Psi)
+\;\Longrightarrow\;
+h_{3/2}(\Psi) = \frac{3\sigma^2}{2}\, h_{1/2}(\Psi).
+$$
+
+**Integration by parts.** Because $\partial_\Psi f(\Psi - x) = -\partial_x f(\Psi - x)$, integrating by parts (boundary terms vanish for a normalizable $f$) gives the identity $h_p'(\Psi) = p\, h_{p-1}(\Psi)$, so in particular
+
+$$
+h_{3/2}'(\Psi) = \frac{3}{2}\, h_{1/2}(\Psi).
+$$
+
+Differentiating the constant-dispersion relation and using this identity,
+
+$$
+\frac{3}{2}\, h_{1/2} = h_{3/2}' = \frac{3\sigma^2}{2}\, h_{1/2}'
+\;\Longrightarrow\;
+\frac{h_{1/2}'(\Psi)}{h_{1/2}(\Psi)} = \frac{1}{\sigma^2}
+\;\Longrightarrow\;
+n(\Psi) \propto e^{\Psi/\sigma^2}.
+$$
+
+**Inversion.** The map $f(\mathcal{E}) \mapsto h_{1/2}(\Psi)$ is an Abel transform, which is injective (it is the kernel of Eddington inversion). The Maxwell-Boltzmann form $f(\mathcal{E}) = C e^{\mathcal{E}/\sigma^2}$ reproduces $h_{1/2}(\Psi) = C\,\Gamma(3/2)\,\sigma^3\, e^{\Psi/\sigma^2}$, i.e. $n(\Psi) \propto e^{\Psi/\sigma^2}$, and fixing the dispersion ratio $h_{3/2}/h_{1/2} = (3/2)\sigma^2$ pins the decay constant to $1/\sigma^2$. By injectivity it is the unique solution:
+
+$$
+f(\mathcal{E}) \propto e^{\mathcal{E}/\sigma^2}.
+$$
+
+The local velocity distribution is therefore
+
+$$
+p(\mathbf{v} \mid \Psi) \propto e^{(\Psi - v^2/2)/\sigma^2} \propto e^{-v^2/(2\sigma^2)},
+$$
+
+a Gaussian (Maxwellian) with dispersion $\sigma^2$, independent of position. This is the isothermal DF: the exponential is the unique energy-dependent $f$ whose local velocity distribution has the same shape at every point.
+
+### Numerical demonstration
+
+A finite isotropic system departs from Gaussian for one reason: $f(\mathcal{E}) = 0$ for unbound energies $\mathcal{E} < 0$, which truncates the local velocity distribution at the escape speed $v_{\rm esc}(r) = \sqrt{2\Psi(r)}$. The **King model** $f(\mathcal{E}) \propto e^{\mathcal{E}/\sigma^2} - 1$ (for $\mathcal{E} > 0$) is the finite version of the isothermal sphere, controlled by the dimensionless central depth $W_0 = \Psi(0)/\sigma^2$. At the center $v_{\rm esc}/\sigma = \sqrt{2 W_0}$, so increasing $W_0$ pushes the truncation out past the thermal core, and as $W_0 \to \infty$ the model approaches the (infinite) isothermal sphere.
+
+Evaluating the central velocity distribution of `galpy.df.kingdf` for increasing $W_0$ confirms this. We measure its shape with the excess kurtosis of a single velocity component, $\kappa = 9\langle v^4\rangle/\langle v^2\rangle^2 / 5 - 3$ (zero for a Gaussian, using $\langle v_x^2\rangle = \langle v^2\rangle/3$ and $\langle v_x^4\rangle = \langle v^4\rangle/5$ for an isotropic distribution). At low $W_0$ the truncation makes the distribution flat-topped ($\kappa < 0$); as $W_0$ grows, $\kappa$ rises smoothly to zero, i.e. the velocity distribution approaches the Maxwellian.
+
+![Central excess kurtosis of a King model rising to zero as $W_0 \to \infty$](assets/generated/p05_09_king_maxwellian_convergence.png)
+
+<!-- ======================= -->
 <!-- REFERENCES              -->
 <!-- ======================= -->
 ## References
