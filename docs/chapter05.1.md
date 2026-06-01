@@ -166,8 +166,8 @@ For comparison, a pure-stellar Milky Way ($f = 0$, $N = 10^{11}$) would have $t_
 The dark-matter mass enclosed within the cluster's half-light radius is
 
 $$
-M_{\mathrm{DM}} = \rho_{\mathrm{DM}}\,\tfrac{4}{3}\pi\,r_h^3
-= 0.3\,\frac{M_\odot}{\mathrm{pc}^3} \times \tfrac{4}{3}\pi\,(13\,\mathrm{pc})^3
+M_{\mathrm{DM}} = \rho_{\mathrm{DM}}\,\frac{4}{3}\pi\,r_h^3
+= 0.3\,\frac{M_\odot}{\mathrm{pc}^3} \times \frac{4}{3}\pi\,(13\,\mathrm{pc})^3
 \approx 2{,}760\,M_\odot
 $$
 
@@ -345,53 +345,98 @@ $$
 \eta \equiv \frac{L}{L_c(\mathcal{E})},
 $$
 
-where $L_c(\mathcal{E})$ is the angular momentum of the circular orbit at energy $\mathcal{E}$. By definition $0 \le \eta \le 1$,  with equality $\eta = 1$ only for circular orbits. Thus,
+where $L_c(\mathcal{E})$ is the angular momentum of the circular orbit at energy $\mathcal{E}$. Since the circular orbit maximizes $L$ at fixed energy (any radial motion diverts kinetic energy away from the tangential component), $0 \le \eta \le 1$ with equality only for circular orbits. The DF becomes
 
 $$
-f(\mathcal{E}, L) \propto \eta^{2|\beta|}\, L_c(\mathcal{E})^{2|\beta|}\, g(\mathcal{E}).
+f \propto \eta^{2|\beta|}\, L_c(\mathcal{E})^{2|\beta|}\, g(\mathcal{E}).
 $$
 
-At fixed radius $r$ and speed $v$, the angular momentum is
+Now consider the full velocity-space integrand at radius $r$. A star at $r$ with speed $v$ and velocity angle $\theta$ (measured from $\mathbf{r}$) has
 
 $$
-L = r v \sin\theta,
+L = r v \sin\theta, \qquad \mathcal{E} = \Psi(r) - \frac{1}{2}v^2,
 $$
 
-so
+so $\eta = rv\sin\theta / L_c(\mathcal{E})$. The condition $\eta = 1$ requires simultaneously:
 
-$$
-\eta = \frac{r v \sin\theta}{L_c(\mathcal{E})} \le \frac{r v}{L_c(\mathcal{E})} \equiv Q_r(v) \le 1.
-$$
+1. $\sin\theta = 1$ (purely tangential motion), and
+2. $rv = L_c(\mathcal{E})$, which is exactly the definition of the circular orbit at radius $r$, i.e., $v = v_c(r)$.
 
-The upper bound $Q_r(v)=1$ is reached only when:
-
-- the velocity is purely tangential ($\sin\theta = 1$),
-- and $v = v_c(r)$ is the circular speed at radius $r$.
-
-After integrating over velocity directions, the speed distribution behaves as
-
-$$
-p(v \mid r) \propto \left[Q_r(v)\right]^{2|\beta|}
-$$
-
-Since:
-
-- $Q_r(v) < 1$ for all $v \ne v_c(r)$,
-- $Q_r(v) = 1$ only at $v = v_c(r)$,
-
-it follows that
-
-$$
-\left[Q_r(v)\right]^{2|\beta|} \to 0 \quad \text{for } v \ne v_c(r),
-$$
-
-as $|\beta| \to \infty$.
-
-Therefore, the speed distribution collapses to a delta function:
+For any other $(v, \theta)$, $\eta < 1$ and therefore $\eta^{2|\beta|} \to 0$ as $|\beta| \to \infty$. Since the integrand of $p(v|r) = v^2 \int d\Omega_v\, f$ vanishes pointwise for $v \neq v_c(r)$ while remaining finite at $v = v_c(r)$, the speed distribution collapses to
 
 $$
 p(v \mid r) \xrightarrow[\beta \to -\infty]{} \delta\!\bigl(v - v_c(r)\bigr).
 $$
+
+<!-- ======================= -->
+<!-- PROBLEM 5.8             -->
+<!-- ======================= -->
+## Problem 5.8
+
+Start with $f(\mathcal{E}, L) = f(Q)\,L^{-2\beta_0}$, $Q = \mathcal{E} - L^2/2r_a^2$ and $Q \geq 0$. We need the velocity moments $\overline{v_r^2}$ and $\overline{v_t^2}$ at radius $r$.
+
+Define $\gamma^2 = 1 + r^2/r_a^2$, $u = \gamma\,v_t$ and note that
+
+$$
+\begin{align}
+Q &= \mathcal{E} - \frac{L^2}{2r_a^2} \\
+&= \Psi - \frac{1}{2}v_r^2 - \frac{1}{2}v_t^2 - \frac{r^2 v_t^2}{2r_a^2} \\
+&= \Psi - \frac{1}{2}v_r^2 - \frac{1}{2}\gamma^2 v_t^2 \\
+&= \Psi - \frac{1}{2}(v_r^2 + u^2)
+\end{align}
+$$
+
+Switch to polar coordinates $v_r = w\cos\phi$, $u = w\sin\phi$ (with $\phi \in [0,\pi]$ since $u \geq 0$, $v_r \in \mathbb{R}$) so that $Q = \Psi - w^2/2$ depends only on $w$. For any velocity moment $\overline{v_r^{2p}\,v_t^{2q}}$, the $w$-integral and the $\phi$-integral factorize. The three integrals we need are (with $\mu = 1 - 2\beta_0$):
+
+$$
+\begin{align}
+\rho &\propto \gamma^{-(\mu+1)} \underbrace{\int_0^{\sqrt{2\Psi}} dw\, w^{\mu+1}\,f(Q)}_{R}
+  \;\cdot\; \underbrace{\int_0^\pi d\phi\, (\sin\phi)^{\mu}}_{I_\mu} \\[6pt]
+\rho\,\overline{v_r^2} &\propto \gamma^{-(\mu+1)} \underbrace{\int_0^{\sqrt{2\Psi}} dw\, w^{\mu+3}\,f(Q)}_{S}
+  \;\cdot\; \underbrace{\int_0^\pi d\phi\, \cos^2\!\phi\;(\sin\phi)^{\mu}}_{J} \\[6pt]
+\rho\,\overline{v_t^2} &\propto \gamma^{-(\mu+3)} \;S
+  \;\cdot\; \underbrace{\int_0^\pi d\phi\, (\sin\phi)^{\mu+2}}_{I_{\mu+2}}
+\end{align}
+$$
+
+The radial integral $S$ and all constants cancel in the ratio $\overline{v_t^2}/(2\overline{v_r^2})$. For the angular integrals, use $\cos^2\!\phi = 1 - \sin^2\!\phi$ to get $J = I_\mu - I_{\mu+2}$, and the Beta-function recurrence
+
+$$
+\frac{I_{\mu+2}}{I_\mu}
+= \frac{B\!\bigl((\mu+3)/2,\,1/2\bigr)}{B\!\bigl((\mu+1)/2,\,1/2\bigr)}
+= \frac{\mu+1}{\mu+2}
+= \frac{1 - \beta_0}{3/2 - \beta_0}
+$$
+
+Therefore
+
+$$
+\frac{I_{\mu+2}}{J} = \frac{I_{\mu+2}}{I_\mu - I_{\mu+2}}
+= \frac{(1-\beta_0)/(3/2-\beta_0)}{1 - (1-\beta_0)/(3/2-\beta_0)}
+= 2(1-\beta_0)
+$$
+
+and
+
+$$
+\frac{\overline{v_t^2}}{2\,\overline{v_r^2}}
+= \frac{\gamma^{-(\mu+3)}\,I_{\mu+2}}{2\,\gamma^{-(\mu+1)}\,J}
+= \frac{1}{\gamma^2}\cdot\frac{I_{\mu+2}}{2\,J}
+= \frac{1-\beta_0}{1 + r^2/r_a^2}
+$$
+
+The anisotropy profile is
+
+$$
+\beta(r) = 1 - \frac{\overline{v_t^2}}{2\,\overline{v_r^2}}
+= \frac{\beta_0 + r^2/r_a^2}{1 + r^2/r_a^2}
+$$
+
+**Limiting cases:**
+
+- $r \to 0$: $\beta \to \beta_0$ (the central anisotropy is set by the $L^{-2\beta_0}$ factor).
+- $r \to \infty$: $\beta \to 1$ (radial orbits dominate at large radii, as in Osipkov-Merritt).
+- $\beta_0 = 0$: recovers the standard Osipkov-Merritt profile $\beta = r^2/(r^2 + r_a^2)$.
 
 <!-- ======================= -->
 <!-- REFERENCES              -->
