@@ -29,6 +29,7 @@ import galactic_dynamics_bovy.chapter03.planet_comet_scattering
 import galactic_dynamics_bovy.chapter04.adiabatic_isochrone
 import galactic_dynamics_bovy.chapter04.gr_precession
 import galactic_dynamics_bovy.chapter04.gr_precession_s2
+import galactic_dynamics_bovy.chapter05.cored_isothermal_sphere
 import galactic_dynamics_bovy.chapter05.isothermal_gaussian_limit
 from galactic_dynamics_bovy.utils.assets import get_registered_assets
 
