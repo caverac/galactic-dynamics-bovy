@@ -34,6 +34,8 @@ import galactic_dynamics_bovy.chapter05.isothermal_gaussian_limit
 import galactic_dynamics_bovy.chapter05.nfw_jeans_dispersion
 import galactic_dynamics_bovy.chapter05.sidm_composite_halo
 import galactic_dynamics_bovy.chapter05.sidm_scatter_radius
+import galactic_dynamics_bovy.chapter06.dsph_mass_anisotropy
+import galactic_dynamics_bovy.chapter06.hernquist_los_dispersion
 import galactic_dynamics_bovy.chapter06.local_group_timing
 from galactic_dynamics_bovy.utils.assets import get_registered_assets
 

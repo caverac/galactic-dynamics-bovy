@@ -142,6 +142,8 @@ $$
 <!-- ======================= -->
 ## Problem 6.5
 
+### Part a: Classical argument
+
 Start with
 
 $$
@@ -181,6 +183,41 @@ $$
 
 So in this model the MW and M31 separated to about $1.05\,\mathrm{Mpc}$ roughly $8\,\mathrm{Gyr}$ ago before turning around and falling back to today's $740\,\mathrm{kpc}$.
 
+### Part b: Including dark energy
+
+With $\rho_\Lambda = \Omega_\Lambda\,\rho_{\mathrm{crit}}$ and $\rho_{\mathrm{crit}} = 3H_0^2/(8\pi G)$, the outward acceleration is $8\pi G\rho_\Lambda r / 3 = \Omega_\Lambda H_0^2\,r$, so
+
+$$
+\ddot r = -\frac{GM}{r^2} + \Omega_\Lambda H_0^2\,r,
+\qquad
+\Phi(r) = -\frac{GM}{r} - \frac{1}{2}\,\Omega_\Lambda H_0^2\,r^2.
+$$
+
+By using the radial-orbit machinery from Section 4.1. Energy is conserved, $E = \tfrac{1}{2}\dot r^2 + \Phi(r)$, $E = \Phi(r_{\max})$. Matching the present-day values fixes the mass for a trial apocenter,
+
+$$
+\tfrac{1}{2}v^2 + \Phi(r) = \Phi(r_{\max})
+\quad\Longrightarrow\quad
+GM = \frac{\tfrac{1}{2}\Omega_\Lambda H_0^2\,(r_{\max}^2 - r^2) + \tfrac{1}{2}v^2}{1/r - 1/r_{\max}}.
+$$
+
+The age is the time from $r = 0$ to apocenter (the radial-period integral) plus the time from apocenter back to the present radius,
+
+$$
+t_{\mathrm{age}} = \int_0^{r_{\max}} \frac{dr'}{\sqrt{2\,[\Phi(r_{\max}) - \Phi(r')]}}
++ \int_{r}^{r_{\max}} \frac{dr'}{\sqrt{2\,[\Phi(r_{\max}) - \Phi(r')]}}.
+$$
+
+Solving these two conditions numerically (root-finding on $r_{\max}$, integrals via `scipy.integrate.quad`) with $\Omega_\Lambda = 0.7$ and $H_0 = 70\,\mathrm{km\,s^{-1}\,Mpc^{-1}}$ gives
+
+$$
+M \approx 5.2\times10^{12}\,M_\odot,
+\qquad
+r_{\max} \approx 1044\,\mathrm{kpc}.
+$$
+
+Dark energy raises the inferred mass by about 13% (from $4.6$ to $5.2\times10^{12}\,M_\odot$): its outward push must be overcome for the pair to have turned around and fallen back within the same age, so a larger mass is required. As a check, setting $\Omega_\Lambda = 0$ recovers the part-a values exactly. The maximum past separation is essentially unchanged ($\approx 1.04\,\mathrm{Mpc}$).
+
 ```python
 from galactic_dynamics_bovy.chapter06.local_group_timing import plot_local_group_timing
 plot_local_group_timing()
@@ -188,4 +225,75 @@ plot_local_group_timing()
 
 ![MW-M31 separation history from the timing argument](assets/generated/p06_05_local_group_timing.png)
 
-*Figure 6.5: The MW-M31 separation over cosmic time for the best-fit radial orbit. The separation grows from zero at the Big Bang to the turnaround at $r_{\max} \approx 1050\,\mathrm{kpc}$, then falls back to the observed $740\,\mathrm{kpc}$ today, where the two galaxies are approaching at $125\,\mathrm{km\,s^{-1}}$.*
+*Figure 6.5: The MW-M31 separation over cosmic time for the matter-only (solid) and $\Lambda$CDM (dashed, $\Omega_\Lambda = 0.7$) radial orbits. Each grows from zero at the Big Bang to its turnaround (dot) near $1.05\,\mathrm{Mpc}$, then falls back to the observed $740\,\mathrm{kpc}$ today. The two trajectories are nearly identical, but the dark-energy fit requires about 13% more mass.*
+
+
+<!-- ======================= -->
+<!-- PROBLEM 6.6             -->
+<!-- ======================= -->
+## Problem 6.6
+
+To investigate the inner slope we model a dwarf spheroidal with a Plummer tracer ($\nu \propto (1 + r^2/b^2)^{-5/2}$, scale $b = 0.25\,\mathrm{kpc}$) embedded in a generalized-NFW halo with inner slope $\gamma$,
+
+$$
+\rho(r) = \rho_s\,(r/r_s)^{-\gamma}\,(1 + r/r_s)^{\gamma - 3}.
+$$
+
+For constant anisotropy the spherical Jeans equation gives $\nu\sigma_r^2(r) = r^{-2\beta}\int_r^\infty dr'\, r'^{2\beta}\,\nu\,GM(<r')/r'^2$, which we project to the line of sight with Eq. (6.18),
+
+$$
+\Sigma(R)\,\sigma_{\mathrm{los}}^2(R) = 2\int_R^\infty dr\,\left(1 - \beta\,\frac{R^2}{r^2}\right)\nu\,\sigma_r^2\,\frac{r}{\sqrt{r^2 - R^2}}.
+$$
+
+We take a cuspy isotropic model ($\gamma = 1$, $\beta = 0$) as the reference "data," and compare cored models ($\gamma = 0$) normalized to the **same enclosed mass** at $0.5\,\mathrm{kpc}$ (the quantity the data actually constrain, via the Wolf estimator).
+
+```python
+from galactic_dynamics_bovy.chapter06.dsph_mass_anisotropy import plot_dsph_mass_anisotropy
+plot_dsph_mass_anisotropy()
+```
+
+![Cusp-core / mass-anisotropy degeneracy in the LOS dispersion](assets/generated/p06_06_dsph_mass_anisotropy.png)
+
+*Figure 6.6: Projected velocity dispersion $\sigma_{\mathrm{los}}(R)$ for a cuspy isotropic halo (solid), a cored isotropic halo (dashed), and a cored radially-anisotropic halo (dotted), all with the same enclosed mass at $0.5\,\mathrm{kpc}$.*
+
+
+!!! warning "Incomplete"
+
+    I don't know how to interpret this plot, I think something is wrong here!
+
+<!-- ======================= -->
+<!-- PROBLEM 6.7             -->
+<!-- ======================= -->
+## Problem 6.7
+
+The Hernquist model is self-consistent: the stars are both the tracer and the source of the potential,
+
+$$
+\rho(r) = \frac{M a}{2\pi r (r + a)^3},
+\qquad
+M(<r) = M\,\frac{r^2}{(r + a)^2},
+\qquad
+\Phi(r) = -\frac{GM}{r + a}.
+$$
+
+For constant anisotropy $\beta$ the radial Jeans equation integrates (with the $r^{2\beta}$ integrating factor) to
+
+$$
+\rho\,\sigma_r^2(r) = r^{-2\beta}\int_r^\infty dr'\, r'^{\,2\beta}\,\rho(r')\,\frac{GM(<r')}{r'^2},
+$$
+
+and the line-of-sight dispersion follows from the projection (Eq. 6.18),
+
+$$
+\Sigma(R)\,\sigma_{\mathrm{los}}^2(R) = 2\int_R^\infty dr\,\left(1 - \beta\,\frac{R^2}{r^2}\right)\rho\,\sigma_r^2\,\frac{r}{\sqrt{r^2 - R^2}}.
+$$
+
+
+```python
+from galactic_dynamics_bovy.chapter06.hernquist_los_dispersion import plot_hernquist_los_dispersion
+plot_hernquist_los_dispersion()
+```
+
+![Hernquist line-of-sight velocity dispersion for constant anisotropies](assets/generated/p06_07_hernquist_los_dispersion.png)
+
+*Figure 6.7: $\sigma_{\mathrm{los}}/\sqrt{GM/a}$ versus $R/a$ for the Hernquist profile with constant anisotropy $\beta = -1/2$ (solid), $0$ (dashed), and $1/2$ (dotted).*
