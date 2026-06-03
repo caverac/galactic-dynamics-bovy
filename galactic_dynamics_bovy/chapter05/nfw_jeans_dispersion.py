@@ -30,9 +30,10 @@ import numpy.typing as npt
 from scipy.integrate import quad
 
 from galactic_dynamics_bovy.utils.assets import register_asset, save_figure_if_changed
+from galactic_dynamics_bovy.utils.units import GalacticUnits
 
-# Gravitational constant in kpc (km/s)^2 / Msun.
-G_KPC_KMS2_MSUN = 4.300917270e-6
+# Gravitational constant in kpc (km/s)^2 / Msun (GalacticUnits uses 10^10 Msun).
+G_KPC_KMS2_MSUN = GalacticUnits.G_kms / 1e10
 
 
 @dataclass
@@ -86,8 +87,7 @@ class NFWHalo:
         NFWHalo
             The halo with derived r_vir, r_s, and rho_s.
         """
-        h0 = hubble / 1000.0  # km/s/kpc
-        rho_crit = 3.0 * h0**2 / (8.0 * np.pi * G_KPC_KMS2_MSUN)
+        rho_crit = GalacticUnits(h=hubble / 100.0).rho_crit * 1e10  # Msun / kpc^3
         r_vir = (3.0 * m_vir / (4.0 * np.pi * overdensity * rho_crit)) ** (1.0 / 3.0)
         r_s = r_vir / concentration
         mass_factor = np.log(1.0 + concentration) - concentration / (1.0 + concentration)

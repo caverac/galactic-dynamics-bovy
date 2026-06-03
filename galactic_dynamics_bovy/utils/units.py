@@ -24,6 +24,11 @@ _G_const = constants.G
 _c_const = constants.c
 _M10 = 1e10 * u.Msun
 
+# Dimensionless scale of the product (sigma/m)[cm^2/g] * v[km/s] * rho[Msun/kpc^3]
+# * t[Gyr], which is the combination that makes a self-interacting dark-matter
+# scattering count Gamma * t dimensionless (Chapter 6).
+SIDM_SCATTER_UNIT: float = float((u.cm**2 / u.g * u.km / u.s * u.Msun / u.kpc**3 * u.Gyr).to(u.dimensionless_unscaled))
+
 
 class SolarUnits:
     """Physical constants in SI units for solar-system dynamics (m, s, kg).

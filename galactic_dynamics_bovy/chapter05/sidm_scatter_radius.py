@@ -29,16 +29,10 @@ from scipy.optimize import brentq
 
 from galactic_dynamics_bovy.chapter05.nfw_jeans_dispersion import NFWHalo
 from galactic_dynamics_bovy.utils.assets import register_asset, save_figure_if_changed
+from galactic_dynamics_bovy.utils.units import SIDM_SCATTER_UNIT
 
-# Unit conversions to make Gamma * t_age dimensionless when sigma/m is in cm^2/g,
-# sigma_r in km/s, rho in Msun/kpc^3, and t_age in Gyr.
-_MSUN_IN_G = 1.988409e33
-_KPC_IN_CM = 3.0856775814913673e21
-_GYR_IN_S = 3.15576e16
-_KM_S_IN_CM_S = 1.0e5
-
-# Gamma * t_age = SCATTER_PREFACTOR * (sigma/m) * t_age[Gyr] * sigma_r[km/s] * rho[Msun/kpc^3].
-SCATTER_PREFACTOR = (4.0 / np.sqrt(np.pi)) * _KM_S_IN_CM_S * (_MSUN_IN_G / _KPC_IN_CM**3) * _GYR_IN_S
+# Gamma * t_age = SCATTER_PREFACTOR * (sigma/m)[cm^2/g] * t_age[Gyr] * sigma_r[km/s] * rho[Msun/kpc^3].
+SCATTER_PREFACTOR = (4.0 / np.sqrt(np.pi)) * SIDM_SCATTER_UNIT
 
 # Cross-section values for the bonus plot, in cm^2/g.
 CROSS_SECTIONS: tuple[float, ...] = (0.5, 1.0, 5.0, 10.0)
