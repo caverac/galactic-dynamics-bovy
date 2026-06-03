@@ -1,3 +1,10 @@
+## v0.12.0 (2026-06-02)
+
+### Feat
+
+- **chapter05**: completed problem 5.12
+- **chapter05**: completed problem 5.11, partial 5.12
+
 ## v0.11.0 (2026-06-01)
 
 ### Feat
