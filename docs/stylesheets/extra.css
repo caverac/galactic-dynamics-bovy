@@ -53,6 +53,14 @@
   background-color: transparent !important;
 }
 
+/* Generated Matplotlib plots: blend the white canvas into dark mode.
+   invert(0.9) maps the white background to a soft gray (~#1a1a1a) rather than
+   pure black, and the black ink to near-white; hue-rotate(180deg) restores
+   colored lines after the inversion. */
+[data-md-color-scheme="slate"] img[src*="assets/generated"] {
+  filter: invert(0.90) hue-rotate(180deg);
+}
+
 /* Footer */
 .md-footer {
   background-color: #0d1117;
