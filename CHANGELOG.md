@@ -1,3 +1,9 @@
+## v0.12.1 (2026-06-03)
+
+### Fix
+
+- **extra.css**: added option to invert color in dark mode
+
 ## v0.12.0 (2026-06-02)
 
 ### Feat
