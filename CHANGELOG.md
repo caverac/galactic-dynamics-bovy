@@ -1,3 +1,11 @@
+## v0.13.0 (2026-06-03)
+
+### Feat
+
+- **chapter06**: completed problems 6.6-6.7
+- **chapter06**: completed problems 6.3-6.5
+- **chapter06**: completed problems 6.1-6.2
+
 ## v0.12.1 (2026-06-03)
 
 ### Fix
