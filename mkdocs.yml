@@ -44,6 +44,9 @@ plugins:
       bib_file: docs/refs.bib
       csl_file: docs/apa.csl
 
+hooks:
+  - mkdocs_hooks.py
+
 markdown_extensions:
   - admonition
   - pymdownx.details
